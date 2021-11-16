@@ -1,0 +1,7 @@
+.toggleIconContainer {
+  @apply fixed top-10 right-10 cursor-pointer;
+}
+
+.toggleIcon {
+  @apply w-6 h-6 text-gray-500;
+}

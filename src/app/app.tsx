@@ -16,6 +16,7 @@ import {
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import Button from "components/atoms/button";
 import CopyButton from "components/molecules/copy-button";
+import ThemeToggle from "components/atoms/theme-toggle";
 
 import styles from "./app.module.css";
 
@@ -104,6 +105,7 @@ const App = (): JSX.Element => {
   return (
     <main className={styles.main}>
       <header className={styles.header}>
+        <ThemeToggle />
         <h3 className={styles.headerTopTitle}>
           <span className={styles.headerTopTitleVital}>Vital</span> @ Vite
           Template
