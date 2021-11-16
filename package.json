@@ -1,0 +1,76 @@
+{
+  "name": "odin-blog-app",
+  "version": "1.0.0",
+  "description": "Blog application frontend as part of TOP's api project",
+  "homepage": "https://github.com/bardenha/odin-blog-app#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bardenha/odin-blog-app.git"
+  },
+  "author": "Harry Barden <bardenha@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bardenha/odin-blog-app/issues"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "typescript",
+    "jest",
+    "tailwind",
+    "template",
+    "starter",
+    "css-modules",
+    "eslint",
+    "prettier",
+    "husky",
+    "commit-lint"
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not IE 11"
+  ],
+  "engines": {
+    "node": ">=16",
+    "yarn": ">=1.22.5"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "test": "jest",
+    "postinstall": "husky install"
+  },
+  "dependencies": {
+    "@heroicons/react": "^1.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.3.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.4",
+    "@types/react": "^17.0.31",
+    "@types/react-dom": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "autoprefixer": "^10.3.7",
+    "eslint": "^8.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
+    "lint-staged": "^11.2.3",
+    "postcss": "^8.3.11",
+    "prettier": "^2.4.1",
+    "tailwindcss": "^2.2.17",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4",
+    "vite": "^2.6.10",
+    "vite-preset-react": "^2.0.0"
+  }
+}
