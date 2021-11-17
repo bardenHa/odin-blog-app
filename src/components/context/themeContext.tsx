@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, ReactNode } from "react";
 
 const getInitialTheme = () => {
   if (typeof window !== "undefined" && window.localStorage) {
@@ -15,10 +15,29 @@ const getInitialTheme = () => {
   return "light";
 };
 
-export const ThemeContext = createContext();
+interface ThemeContextType {
+  theme: string;
+  setTheme?: (value: string) => void;
+}
 
-export const ThemeProvider = ({ initialTheme, children }) => {
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
+  setTheme: () => {
+    return;
+  },
+});
+
+interface ThemeProviderProps {
+  initialTheme?: "light" | "dark";
+  children: ReactNode;
+}
+
+export const ThemeProvider = ({
+  initialTheme,
+  children,
+}: ThemeProviderProps) => {
   const [theme, setTheme] = useState(getInitialTheme);
+
   const rawSetTheme = (rawTheme) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === "dark";
@@ -26,12 +45,15 @@ export const ThemeProvider = ({ initialTheme, children }) => {
     root.classList.add(rawTheme);
     localStorage.setItem("color-theme", rawTheme);
   };
+
   if (initialTheme) {
     rawSetTheme(initialTheme);
   }
+
   useEffect(() => {
     rawSetTheme(theme);
   }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

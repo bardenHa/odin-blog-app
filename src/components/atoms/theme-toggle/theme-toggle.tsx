@@ -4,7 +4,7 @@ import { ThemeContext } from "components/context/themeContext";
 import { SunIcon, MoonIcon } from "@heroicons/react/outline";
 
 const ThemeToggle = forwardRef<
-  HTMLButtonElement,
+  HTMLDivElement,
   Omit<ComponentProps<"div">, "className">
 >(() => {
   const { theme, setTheme } = useContext(ThemeContext);
