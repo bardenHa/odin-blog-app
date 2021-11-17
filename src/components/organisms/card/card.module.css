@@ -7,11 +7,15 @@
 }
 
 .title {
-  @apply text-2xl font-bold text-black text-blue-500;
+  @apply text-2xl font-bold text-blue-500;
 }
 
 .description {
-  @apply mt-2 text-base text-gray-300 flex-1;
+  @apply mt-2 text-base text-light-text flex-1;
+}
+
+:global(.dark) .description {
+  @apply text-dark-text;
 }
 
 .iconContainer {
@@ -19,5 +23,9 @@
 }
 
 .icon {
-  @apply h-12 w-12 text-white;
+  @apply h-12 w-12 text-light-text;
+}
+
+:global(.dark) .icon {
+  @apply text-dark-text;
 }
