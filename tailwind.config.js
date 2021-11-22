@@ -12,6 +12,7 @@ module.exports = {
         "light-theme": "#FFFFFF",
         "dark-text": "#F3F3F3",
         "dark-theme": "#111827",
+        primary: "#3b81f5",
       },
     },
   },
