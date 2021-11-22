@@ -1,11 +1,12 @@
 const forms = require("@tailwindcss/forms");
+const lineClamp = require("@tailwindcss/line-clamp");
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   darkMode: "class",
   mode: "jit",
   purge: ["./*.html", "./src/**/*.{css}"],
-  plugins: [forms],
+  plugins: [forms, lineClamp],
   theme: {
     extend: {
       colors: {

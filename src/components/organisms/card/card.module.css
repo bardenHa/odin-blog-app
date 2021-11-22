@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white bg-opacity-5 rounded-md shadow p-4 relative overflow-hidden h-full;
+  @apply bg-white bg-opacity-5 rounded-md shadow p-4 relative overflow-hidden;
 }
 
 .content {
@@ -11,7 +11,7 @@
 }
 
 .description {
-  @apply mt-2 text-base text-light-text flex-1;
+  @apply mt-2 text-base text-light-text flex-1 line-clamp-3;
 }
 
 :global(.dark) .description {

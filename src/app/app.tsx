@@ -22,7 +22,7 @@ const features = [
   {
     name: "Vite",
     description:
-      "Faster and leaner development experience for modern web projects.",
+      "Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.",
     logo: CubeTransparentIcon,
     docs: "https://vitejs.dev/",
   },
@@ -127,7 +127,7 @@ const App = (): JSX.Element => {
           <code className={styles.headerDescriptionCode}>Mongoose</code>,{" "}
           <code className={styles.headerDescriptionCode}>PassportJS</code> and{" "}
           <code className={styles.headerDescriptionCode}>JWT</code> for
-          authentication{" "}
+          authentication.{" "}
         </p>
         <div className={styles.viteLogoContainer}>
           <Logos.Vite className={styles.viteLogo} />
@@ -156,7 +156,7 @@ const App = (): JSX.Element => {
               Icon={props.logo}
               callToAction={
                 <Card.CallToAction as="a" href={props.docs} target="_blank">
-                  Visit documentation →
+                  Visit article →
                 </Card.CallToAction>
               }
             />
