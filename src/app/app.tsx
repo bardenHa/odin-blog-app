@@ -104,23 +104,30 @@ const App = (): JSX.Element => {
   return (
     <main className={styles.main}>
       <header className={styles.header}>
-        <h3 className={styles.headerTopTitle}>
-          <span className={styles.headerTopTitleVital}>Vital</span> @ Vite
-          Template
-        </h3>
-        <h1 className={styles.headerTitle}>Odin blog</h1>
+        <h1 className={styles.headerTitle}>Odin Blog</h1>
         <p className={styles.headerDescription}>
-          Bootstrap your web projects faster than ever. Comes with:{" "}
+          A MERN stack blog application developed as part of{" "}
+          <a
+            href="https://www.theodinproject.com/"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className={styles.anchorLink}
+          >
+            The Odin Project
+          </a>
+          's curriculum. Built using:{" "}
           <code className={styles.headerDescriptionCode}>CSS-Modules</code>,{" "}
           <code className={styles.headerDescriptionCode}>Jest</code>,{" "}
-          <code className={styles.headerDescriptionCode}>Husky</code>,{" "}
+          <code className={styles.headerDescriptionCode}>TypeScript</code>,{" "}
           <code className={styles.headerDescriptionCode}>Commit-lint</code>,{" "}
           <code className={styles.headerDescriptionCode}>ESLint</code>,{" "}
           <code className={styles.headerDescriptionCode}>Prettier</code> and{" "}
-          <code className={styles.headerDescriptionCode}>
-            Atomic organization for components
-          </code>
-          . Configured and ready to go.
+          <code className={styles.headerDescriptionCode}>Vite</code> for the
+          front-end. The back-end makes use of:{" "}
+          <code className={styles.headerDescriptionCode}>Mongoose</code>,{" "}
+          <code className={styles.headerDescriptionCode}>PassportJS</code> and{" "}
+          <code className={styles.headerDescriptionCode}>JWT</code> for
+          authentication{" "}
         </p>
         <div className={styles.viteLogoContainer}>
           <Logos.Vite className={styles.viteLogo} />
