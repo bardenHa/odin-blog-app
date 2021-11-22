@@ -15,7 +15,6 @@ import {
 } from "@heroicons/react/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import Button from "components/atoms/button";
-import CopyButton from "components/molecules/copy-button";
 
 import styles from "./app.module.css";
 
@@ -117,6 +116,7 @@ const App = (): JSX.Element => {
           </a>
           's curriculum. Built using:{" "}
           <code className={styles.headerDescriptionCode}>CSS-Modules</code>,{" "}
+          <code className={styles.headerDescriptionCode}>Tailwind</code>,{" "}
           <code className={styles.headerDescriptionCode}>Jest</code>,{" "}
           <code className={styles.headerDescriptionCode}>TypeScript</code>,{" "}
           <code className={styles.headerDescriptionCode}>Commit-lint</code>,{" "}
@@ -136,9 +136,11 @@ const App = (): JSX.Element => {
       <section className={styles.copy}>
         <div className={styles.copyInner}>
           <a href="https://github.com/jvidalv/vital">
-            <Button>Visit on Github</Button>
+            <Button>Sign Up</Button>
           </a>
-          <CopyButton text="npx degit jvidalv/vital my-app" />
+          <a href="#" className={styles.anchorCallToAction}>
+            Articles →
+          </a>
         </div>
       </section>
       <section className={styles.features}>
