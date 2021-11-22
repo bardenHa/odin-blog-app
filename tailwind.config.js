@@ -1,4 +1,5 @@
 const forms = require("@tailwindcss/forms");
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   darkMode: "class",
@@ -13,6 +14,10 @@ module.exports = {
         "dark-text": "#F3F3F3",
         "dark-theme": "#111827",
         primary: "#3b81f5",
+      },
+      fontFamily: {
+        ...fontFamily,
+        sans: ["Inter", "system-ui"],
       },
     },
   },

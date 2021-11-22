@@ -108,7 +108,7 @@ const App = (): JSX.Element => {
           <span className={styles.headerTopTitleVital}>Vital</span> @ Vite
           Template
         </h3>
-        <h1 className={styles.headerTitle}>React + TypeScript + Tailwind</h1>
+        <h1 className={styles.headerTitle}>Odin blog</h1>
         <p className={styles.headerDescription}>
           Bootstrap your web projects faster than ever. Comes with:{" "}
           <code className={styles.headerDescriptionCode}>CSS-Modules</code>,{" "}
