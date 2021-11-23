@@ -96,7 +96,7 @@
 }
 
 .anchorLink {
-  @apply hover:text-primary;
+  @apply hover:text-primary duration-[0ms];
 }
 
 .anchorCallToAction {
