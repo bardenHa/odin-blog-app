@@ -19,11 +19,11 @@
 }
 
 .iconContainer {
-  @apply absolute right-3 bottom-3 flex items-center justify-center rounded-md opacity-10;
+  @apply absolute right-3 bottom-3 flex items-center justify-center rounded-md opacity-50;
 }
 
 .icon {
-  @apply h-12 w-12 text-light-text;
+  @apply h-12 w-12 md:h-24 md:w-24 text-light-text transition-width duration-700 ease-in-out;
 }
 
 :global(.dark) .icon {

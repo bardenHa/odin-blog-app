@@ -6,17 +6,17 @@ export interface CardProps
   extends Omit<ComponentProps<"div">, "className" | "children"> {
   title: string;
   description: string;
-  Icon: (props: ComponentProps<"svg">) => JSX.Element;
+  icon: string;
   callToAction: JSX.Element;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ title, description, callToAction, Icon, ...rest }, ref) => {
+  ({ title, description, callToAction, icon, ...rest }, ref) => {
     return (
       <div ref={ref} className={styles.card} {...rest}>
         <div>
           <span className={styles.iconContainer}>
-            <Icon className={styles.icon} aria-hidden="true" />
+            <img src={icon} alt="Author icon" className={styles.icon} />
           </span>
         </div>
         <div className={styles.content}>
