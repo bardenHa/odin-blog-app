@@ -117,16 +117,20 @@ const App = (): JSX.Element => {
   const [articles, setArticles] = useState(demoArticles);
 
   const fetchArticles = async () => {
-    const res = await fetch("http://localhost:8080/api/articles/?limit=5", {
-      method: "GET",
-      headers: {
-        "cache-control": "no-cache",
-      },
-    });
-    const data = await res.json();
-    console.log(data);
+    try {
+      const res = await fetch("http://localhost:8080/api/articles/?limit=5", {
+        method: "GET",
+        headers: {
+          "cache-control": "no-cache",
+        },
+      });
 
-    setArticles(data.articles);
+      const data = await res.json();
+      setArticles(data.articles);
+    } catch (error) {
+      console.log("fetch error", error);
+      setArticles(demoArticles);
+    }
   };
 
   useEffect(() => {
