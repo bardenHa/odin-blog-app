@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white bg-opacity-5 rounded-md shadow p-4 relative overflow-hidden;
+  @apply bg-white bg-opacity-5 rounded-md shadow-md p-4 relative overflow-hidden;
 }
 
 .content {
