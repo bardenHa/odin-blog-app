@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white bg-opacity-5 rounded-md shadow p-4 relative overflow-hidden h-full;
+  @apply bg-white bg-opacity-5 rounded-md shadow-md p-4 relative overflow-hidden;
 }
 
 .content {
@@ -11,7 +11,7 @@
 }
 
 .description {
-  @apply mt-2 text-base text-light-text flex-1;
+  @apply mt-2 text-base text-light-text flex-1 line-clamp-3;
 }
 
 :global(.dark) .description {
@@ -19,11 +19,11 @@
 }
 
 .iconContainer {
-  @apply absolute right-3 bottom-3 flex items-center justify-center rounded-md opacity-10;
+  @apply absolute right-3 bottom-0 flex items-center justify-center rounded-md opacity-50;
 }
 
 .icon {
-  @apply h-12 w-12 text-light-text;
+  @apply h-12 w-12 md:h-24 md:w-24 text-light-text transition-width duration-700 ease-in-out;
 }
 
 :global(.dark) .icon {

@@ -1,126 +1,170 @@
 import Logos from "components/atoms/logos";
 import Card from "components/organisms/card";
-import {
-  BeakerIcon,
-  BookmarkAltIcon,
-  CakeIcon,
-  ChevronDownIcon,
-  CubeTransparentIcon,
-  FilmIcon,
-  LocationMarkerIcon,
-  LockClosedIcon,
-  MenuIcon,
-  PencilIcon,
-  PhotographIcon,
-} from "@heroicons/react/outline";
-import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import Button from "components/atoms/button";
-import CopyButton from "components/molecules/copy-button";
 
 import styles from "./app.module.css";
+import { useEffect, useState } from "react";
 
-const features = [
+const defaultImage =
+  "https://avatars.dicebear.com/api/avataaars/harrybarden.svg?topChance=100&eyes[]=default&eyes[]=wink&eyes[]=happy&eyebrow[]=defaultNatural&eyebrow[]=default&mouth[]=smile&mouth[]=default";
+
+const demoArticles = [
   {
-    name: "Vite",
+    title: "Vite",
     description:
-      "Faster and leaner development experience for modern web projects.",
-    logo: CubeTransparentIcon,
-    docs: "https://vitejs.dev/",
+      "Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.Faster and leaner development experience for modern web projects.",
+    slug: "https://vitejs.dev/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "React",
+    title: "React",
     description: "JavaScript library for building user interfaces.",
-    logo: PencilIcon,
-    docs: "https://reactjs.org/",
+    slug: "https://reactjs.org/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "TypeScript",
+    title: "TypeScript",
     description:
       "Strongly typed programming language that builds on JavaScript.",
-    logo: BookmarkAltIcon,
-    docs: "https://www.typescriptlang.org/",
+    slug: "https://www.typescriptlang.org/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Tailwind with JIT",
+    title: "Tailwind with JIT",
     description: "A utility-first CSS framework packed with classes.",
-    logo: PhotographIcon,
-    docs: "https://tailwindcss.com/",
+    slug: "https://tailwindcss.com/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Jest",
+    title: "Jest",
     description: "Testing Framework with a focus on simplicity.",
-    logo: QuestionMarkCircleIcon,
-    docs: "https://jestjs.io/",
+    slug: "https://jestjs.io/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "CSS Modules",
+    title: "CSS Modules",
     description:
       "CSS file in which all class names and animation names are scoped locally by default.",
-    logo: LockClosedIcon,
-    docs: "https://github.com/css-modules/css-modules",
+    slug: "https://github.com/css-modules/css-modules",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "ESLint",
+    title: "ESLint",
     description: "Find and fix problems in your JavaScript code.",
-    logo: BeakerIcon,
-    docs: "https://eslint.org/",
+    slug: "https://eslint.org/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Prettier",
+    title: "Prettier",
     description: "An opinionated code formatter.",
-    logo: MenuIcon,
-    docs: "https://prettier.io/",
+    slug: "https://prettier.io/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Husky",
+    title: "Husky",
     description:
       "Lint your commit messages, run tests, lint code, etc... when you commit or push.",
-    logo: CakeIcon,
-    docs: "https://github.com/typicode/husky",
+    slug: "https://github.com/typicode/husky",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Commit-lint",
+    title: "Commit-lint",
     description: "Helps your team adhering to a commit convention.",
-    logo: FilmIcon,
-    docs: "https://github.com/conventional-changelog/commitlint",
+    slug: "https://github.com/conventional-changelog/commitlint",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Atomic design",
+    title: "Atomic design",
     description:
       "We’re not designing pages, we’re designing systems of components.",
-    logo: LocationMarkerIcon,
-    docs: "https://bradfrost.com/blog/post/atomic-web-design/",
+    slug: "https://bradfrost.com/blog/post/atomic-web-design/",
+    author: {
+      image: defaultImage,
+    },
   },
   {
-    name: "Absolute imports",
+    title: "Absolute imports",
     description:
       "Import resource using its full path from the project’s src folder.",
-    logo: ChevronDownIcon,
-    docs: "https://github.com/vitejs/vite/issues/88#issuecomment-762415200",
+    slug: "https://github.com/vitejs/vite/issues/88#issuecomment-762415200",
+    author: {
+      image: defaultImage,
+    },
   },
 ];
 
 const App = (): JSX.Element => {
+  const [articles, setArticles] = useState(demoArticles);
+
+  const fetchArticles = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/articles/?limit=5", {
+        method: "GET",
+        headers: {
+          "cache-control": "no-cache",
+        },
+      });
+
+      const data = await res.json();
+      setArticles(data.articles);
+    } catch (error) {
+      console.log("fetch error", error);
+      setArticles(demoArticles);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
   return (
     <main className={styles.main}>
       <header className={styles.header}>
-        <h3 className={styles.headerTopTitle}>
-          <span className={styles.headerTopTitleVital}>Vital</span> @ Vite
-          Template
-        </h3>
-        <h1 className={styles.headerTitle}>React + TypeScript + Tailwind</h1>
+        <h1 className={styles.headerTitle}>Odin Blog</h1>
         <p className={styles.headerDescription}>
-          Bootstrap your web projects faster than ever. Comes with:{" "}
+          A MERN stack blog application developed as part of{" "}
+          <a
+            href="https://www.theodinproject.com/"
+            target="_blank"
+            rel="nofollow noreferrer"
+            className={styles.anchorLink}
+          >
+            The Odin Project
+          </a>
+          's curriculum. Built using:{" "}
           <code className={styles.headerDescriptionCode}>CSS-Modules</code>,{" "}
+          <code className={styles.headerDescriptionCode}>Tailwind</code>,{" "}
           <code className={styles.headerDescriptionCode}>Jest</code>,{" "}
-          <code className={styles.headerDescriptionCode}>Husky</code>,{" "}
+          <code className={styles.headerDescriptionCode}>TypeScript</code>,{" "}
           <code className={styles.headerDescriptionCode}>Commit-lint</code>,{" "}
           <code className={styles.headerDescriptionCode}>ESLint</code>,{" "}
           <code className={styles.headerDescriptionCode}>Prettier</code> and{" "}
-          <code className={styles.headerDescriptionCode}>
-            Atomic organization for components
-          </code>
-          . Configured and ready to go.
+          <code className={styles.headerDescriptionCode}>Vite</code> for the
+          front-end. The back-end makes use of:{" "}
+          <code className={styles.headerDescriptionCode}>Mongoose</code>,{" "}
+          <code className={styles.headerDescriptionCode}>PassportJS</code> and{" "}
+          <code className={styles.headerDescriptionCode}>JWT</code> for
+          authentication.{" "}
         </p>
         <div className={styles.viteLogoContainer}>
           <Logos.Vite className={styles.viteLogo} />
@@ -129,25 +173,27 @@ const App = (): JSX.Element => {
       <section className={styles.copy}>
         <div className={styles.copyInner}>
           <a href="https://github.com/jvidalv/vital">
-            <Button>Visit on Github</Button>
+            <Button>Sign Up</Button>
           </a>
-          <CopyButton text="npx degit jvidalv/vital my-app" />
+          <a href="#" className={styles.anchorCallToAction}>
+            Articles →
+          </a>
         </div>
       </section>
       <section className={styles.features}>
-        {features.map((props, index) => (
+        {articles.map((props, index) => (
           <div
             key={index}
             className={styles.cardWrapper}
             style={{ animationDelay: `${index * 0.1 + 0.1}s` }}
           >
             <Card
-              title={props.name}
+              title={props.title}
               description={props.description}
-              Icon={props.logo}
+              icon={props.author.image}
               callToAction={
-                <Card.CallToAction as="a" href={props.docs} target="_blank">
-                  Visit documentation →
+                <Card.CallToAction as="a" href={props.slug} target="_blank">
+                  Visit article →
                 </Card.CallToAction>
               }
             />
