@@ -1,0 +1,7 @@
+.formWrapper {
+  @apply flex justify-center align-middle items-center w-full h-screen text-light-text;
+}
+
+:global(.dark) .formWrapper {
+  @apply text-dark-text;
+}
