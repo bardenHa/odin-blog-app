@@ -8,8 +8,19 @@ export default function SignUp() {
 
   return (
     <section className={styles.formWrapper}>
+      <div className={styles.formHeader}>
+        <h2 className="text-xl font-semibold md:text-2xl">Sign up</h2>
+        <p className="text-secondary">
+          Already have an account?
+          <a className="font-medium" href="/sign-in">
+            {" "}
+            Sign in
+          </a>
+          .
+        </p>
+      </div>
       <form
-        className="new_user"
+        className={styles.form}
         id="new_user"
         action="/"
         acceptCharset="UTF-8"

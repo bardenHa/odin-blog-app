@@ -1,5 +1,21 @@
 .formWrapper {
-  @apply flex justify-center align-middle items-center w-full h-screen text-light-text;
+  @apply flex flex-col justify-center align-middle max-w-2xl mx-auto w-full h-screen text-light-text;
+}
+
+.formHeader {
+  @apply mb-6;
+}
+
+.formHeader h2 {
+  @apply text-2xl font-semibold mb-1;
+}
+
+.formHeader p {
+  @apply text-sm;
+}
+
+.formHeader a {
+  @apply text-blue-500;
 }
 
 :global(.dark) .formWrapper {
