@@ -5,3 +5,23 @@
 :global(.dark) .formWrapper {
   @apply text-dark-text;
 }
+
+.formField {
+  @apply mb-3;
+}
+
+.signupButtonWrapper {
+  @apply flex justify-between;
+}
+
+.signupButton {
+  @apply w-full py-2 rounded-lg mt-12 bg-blue-600 text-dark-text;
+}
+
+.emailInput {
+  @apply w-full;
+}
+
+.formWrapper input {
+  @apply w-full rounded-lg text-light-text;
+}

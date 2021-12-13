@@ -16,7 +16,7 @@ export default function SignUp() {
         method="post"
       >
         <input type="hidden" />
-        <div className="mb-3">
+        <div className={styles.formField}>
           <label htmlFor="user_email">Email</label>
           <input
             autoFocus={true}
@@ -24,10 +24,10 @@ export default function SignUp() {
             required={true}
             type="email"
             name="user[email]"
-            id="user_email"
+            className={styles.emailInput}
           />
         </div>
-        <div className="mb-3">
+        <div className={styles.formField}>
           <div className="flex items-center justify-between leading-none mb-1.5">
             <label className="mb-0" htmlFor="user_password">
               Password
@@ -47,7 +47,7 @@ export default function SignUp() {
             spellCheck="false"
           />
         </div>
-        <div className="mb-4">
+        <div className={styles.formField}>
           <label htmlFor="user_password_confirmation">
             Password confirmation
           </label>
@@ -59,28 +59,8 @@ export default function SignUp() {
             id="user_password_confirmation"
           />
         </div>
-        <div className="flex items-center mb-4">
-          <input
-            className="mr-1"
-            type="checkbox"
-            defaultValue={1}
-            name="tos"
-            id="tos"
-            required
-          />
-          <label className="mb-0 font-normal" htmlFor="tos">
-            I've read and agree to the{" "}
-            <a href="/" target="_blank" rel="noreferrer">
-              Terms of Service
-            </a>
-          </label>
-        </div>
-        <div className="flex justify-between">
-          <button
-            name="button"
-            type="submit"
-            className="w-full btn btn-primary"
-          >
+        <div className={styles.signupButtonWrapper}>
+          <button name="button" type="submit" className={styles.signupButton}>
             Sign up
           </button>
         </div>
