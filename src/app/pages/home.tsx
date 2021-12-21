@@ -6,6 +6,7 @@ import styles from "app/app.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "constants/routes";
+import { API_URL } from "constants/urls";
 
 const defaultImage =
   "https://avatars.dicebear.com/api/avataaars/harrybarden.svg?topChance=100&eyes[]=default&eyes[]=wink&eyes[]=happy&eyebrow[]=defaultNatural&eyebrow[]=default&mouth[]=smile&mouth[]=default";
@@ -120,7 +121,7 @@ const Home = (): JSX.Element => {
 
   const fetchArticles = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/articles/?limit=5", {
+      const res = await fetch(`${API_URL}/api/articles/?limit=5`, {
         method: "GET",
         headers: {
           "cache-control": "no-cache",
