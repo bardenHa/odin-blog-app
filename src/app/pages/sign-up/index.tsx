@@ -1,10 +1,40 @@
 import { useEffect } from "react";
 import styles from "./signup.module.css";
+import { API_URL } from "constants/urls";
 
 export default function SignUp() {
   useEffect(() => {
     document.title = "Sign up - Odin Blog";
   }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const data = {
+      user: {
+        username: formData.get("username"),
+        email: formData.get("email"),
+        first_name: formData.get("first_name"),
+        last_name: formData.get("last_name"),
+        password: formData.get("password"),
+      },
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "cache-control": "no-cache",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(res);
+    } catch (error) {
+      console.log("post error", error);
+    }
+  };
 
   return (
     <section className={styles.formWrapper}>
@@ -22,9 +52,9 @@ export default function SignUp() {
       <form
         className={styles.form}
         id="new_user"
-        action="/"
         acceptCharset="UTF-8"
         method="post"
+        onSubmit={handleSubmit}
       >
         <input type="hidden" />
         <div className={styles.formField}>
@@ -34,8 +64,38 @@ export default function SignUp() {
             autoComplete="email"
             required={true}
             type="email"
-            name="user[email]"
+            name="email"
             className={styles.emailInput}
+          />
+        </div>
+        <div className={styles.formField}>
+          <label htmlFor="username">Username</label>
+          <input
+            autoComplete="new-password"
+            required={true}
+            type="text"
+            name="username"
+            id="username"
+          />
+        </div>
+        <div className={styles.formField}>
+          <label htmlFor="first_name">First Name</label>
+          <input
+            autoComplete="new-password"
+            required={true}
+            type="text"
+            name="first_name"
+            id="first_name"
+          />
+        </div>
+        <div className={styles.formField}>
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            autoComplete="new-password"
+            required={true}
+            type="text"
+            name="last_name"
+            id="last_name"
           />
         </div>
         <div className={styles.formField}>
@@ -53,21 +113,9 @@ export default function SignUp() {
             autoComplete="off"
             required
             type="password"
-            name="user[password]"
+            name="password"
             id="user_password"
             spellCheck="false"
-          />
-        </div>
-        <div className={styles.formField}>
-          <label htmlFor="user_password_confirmation">
-            Password confirmation
-          </label>
-          <input
-            autoComplete="new-password"
-            required={true}
-            type="password"
-            name="user[password_confirmation]"
-            id="user_password_confirmation"
           />
         </div>
         <div className={styles.signupButtonWrapper}>

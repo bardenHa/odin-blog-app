@@ -121,7 +121,7 @@ const Home = (): JSX.Element => {
 
   const fetchArticles = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/articles/?limit=5`, {
+      const res = await fetch(`${API_URL}/articles/?limit=5`, {
         method: "GET",
         headers: {
           "cache-control": "no-cache",
