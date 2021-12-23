@@ -39,14 +39,10 @@ export default function SignUp() {
   return (
     <section className={styles.formWrapper}>
       <div className={styles.formHeader}>
-        <h2 className="text-xl font-semibold md:text-2xl">Sign up</h2>
-        <p className="text-secondary">
+        <h2>Sign up</h2>
+        <p>
           Already have an account?
-          <a className="font-medium" href="/sign-in">
-            {" "}
-            Sign in
-          </a>
-          .
+          <a href="/sign-in"> Sign in</a>.
         </p>
       </div>
       <form
@@ -71,7 +67,7 @@ export default function SignUp() {
         <div className={styles.formField}>
           <label htmlFor="username">Username</label>
           <input
-            autoComplete="new-password"
+            autoComplete="nickname"
             required={true}
             type="text"
             name="username"
@@ -81,7 +77,7 @@ export default function SignUp() {
         <div className={styles.formField}>
           <label htmlFor="first_name">First Name</label>
           <input
-            autoComplete="new-password"
+            autoComplete="given-name"
             required={true}
             type="text"
             name="first_name"
@@ -91,23 +87,17 @@ export default function SignUp() {
         <div className={styles.formField}>
           <label htmlFor="last_name">Last Name</label>
           <input
-            autoComplete="new-password"
+            autoComplete="family-name"
             required={true}
             type="text"
             name="last_name"
             id="last_name"
           />
         </div>
-        <div className={styles.formField}>
-          <div className="flex items-center justify-between leading-none mb-1.5">
-            <label className="mb-0" htmlFor="user_password">
-              Password
-            </label>
-            <div
-              className="js-password-strength-container"
-              aria-live="polite"
-            />
-          </div>
+        <div className={styles.passwordField}>
+          <label className="mb-0" htmlFor="user_password">
+            Password
+          </label>
           <input
             className="js-password-strength"
             autoComplete="off"
@@ -115,6 +105,20 @@ export default function SignUp() {
             type="password"
             name="password"
             id="user_password"
+            spellCheck="false"
+          />
+        </div>
+        <div className={styles.formField}>
+          <label className="mb-0" htmlFor="user_password">
+            Password confirmation
+          </label>
+          <input
+            className="js-password-strength"
+            autoComplete="off"
+            required
+            type="password"
+            name="password_confirmation"
+            id="user_password_confirmation"
             spellCheck="false"
           />
         </div>

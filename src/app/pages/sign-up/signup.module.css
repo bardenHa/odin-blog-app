@@ -18,6 +18,10 @@
   @apply text-blue-500;
 }
 
+.form input {
+  @apply mt-1;
+}
+
 :global(.dark) .formWrapper {
   @apply text-dark-text;
 }
@@ -26,12 +30,16 @@
   @apply mb-3;
 }
 
+.passwordField {
+  @apply mt-12 mb-3;
+}
+
 .signupButtonWrapper {
   @apply flex justify-between;
 }
 
 .signupButton {
-  @apply w-full py-2 rounded-lg mt-12 bg-blue-600 text-dark-text;
+  @apply w-full py-2.5 rounded-lg mt-16 bg-blue-600 text-dark-text;
 }
 
 .emailInput {
