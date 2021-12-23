@@ -1,16 +1,40 @@
 import { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 import { API_URL } from "constants/urls";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  email: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  password_confirmation: string;
+};
+
+const VALIDATION_MESSAGES = {
+  REQUIRED: "This field is required.",
+  MAX_LENGTH: "This field contains too many characters.",
+  PASSWORD_CONFIRMATION: "Passwords must match.",
+};
 
 export default function SignUp() {
-  const [error, setError] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<Inputs>();
+  const [error, setError] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   useEffect(() => {
     document.title = "Sign up - Odin Blog";
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmittemp = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
@@ -53,7 +77,7 @@ export default function SignUp() {
         id="new_user"
         acceptCharset="UTF-8"
         method="post"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <input type="hidden" />
         <div className={styles.formField}>
@@ -65,7 +89,15 @@ export default function SignUp() {
             type="email"
             name="email"
             className={styles.emailInput}
+            {...register("email", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 100,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+            })}
           />
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div className={styles.formField}>
           <label htmlFor="username">Username</label>
@@ -75,7 +107,15 @@ export default function SignUp() {
             type="text"
             name="username"
             id="username"
+            {...register("username", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 25,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+            })}
           />
+          {errors.username && <span>{errors.username.message}</span>}
         </div>
         <div className={styles.formField}>
           <label htmlFor="first_name">First Name</label>
@@ -85,7 +125,15 @@ export default function SignUp() {
             type="text"
             name="first_name"
             id="first_name"
+            {...register("first_name", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 25,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+            })}
           />
+          {errors.first_name && <span>{errors.first_name.message}</span>}
         </div>
         <div className={styles.formField}>
           <label htmlFor="last_name">Last Name</label>
@@ -95,7 +143,15 @@ export default function SignUp() {
             type="text"
             name="last_name"
             id="last_name"
+            {...register("last_name", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 25,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+            })}
           />
+          {errors.last_name && <span>{errors.last_name.message}</span>}
         </div>
         <div className={styles.passwordField}>
           <label className="mb-0" htmlFor="user_password">
@@ -109,7 +165,15 @@ export default function SignUp() {
             name="password"
             id="user_password"
             spellCheck="false"
+            {...register("password", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 150,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+            })}
           />
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className={styles.formField}>
           <label className="mb-0" htmlFor="user_password">
@@ -123,7 +187,22 @@ export default function SignUp() {
             name="password_confirmation"
             id="user_password_confirmation"
             spellCheck="false"
+            {...register("password_confirmation", {
+              required: VALIDATION_MESSAGES.REQUIRED,
+              maxLength: {
+                value: 150,
+                message: VALIDATION_MESSAGES.MAX_LENGTH,
+              },
+              validate: {
+                passwordMatch: (value) =>
+                  value === getValues("password") ||
+                  VALIDATION_MESSAGES.PASSWORD_CONFIRMATION,
+              },
+            })}
           />
+          {errors.password_confirmation && (
+            <span>{errors.password_confirmation.message}</span>
+          )}
         </div>
         <div className={styles.signupButtonWrapper}>
           <button name="button" type="submit" className={styles.signupButton}>
