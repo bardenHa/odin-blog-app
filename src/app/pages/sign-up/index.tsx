@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 import { API_URL } from "constants/urls";
 
 export default function SignUp() {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     document.title = "Sign up - Odin Blog";
   }, []);
@@ -127,7 +130,20 @@ export default function SignUp() {
             Sign up
           </button>
         </div>
+        <ErrorMessage error={error} />
       </form>
     </section>
   );
 }
+
+const ErrorMessage = ({ error }) => {
+  return (
+    <>
+      {error && (
+        <div>
+          <p>Error message</p>
+        </div>
+      )}
+    </>
+  );
+};
