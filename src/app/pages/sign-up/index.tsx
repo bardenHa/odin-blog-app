@@ -25,43 +25,50 @@ export default function SignUp() {
     formState: { errors },
     getValues,
   } = useForm<Inputs>();
-  const [error, setError] = useState(true);
-  const [loading, setLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const formData = {
+      user: {
+        username: data.username,
+        email: data.email,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        password: data.password,
+      },
+    };
+
+    fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "cache-control": "no-cache",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setError(null);
+        console.log("data", data);
+      })
+      .catch((error) => {
+        error.then((errorObject: object) => {
+          const errorMessages = errorObject[Object.keys(errorObject)[0]];
+          setError(errorMessages);
+        });
+      });
+  };
 
   useEffect(() => {
     document.title = "Sign up - Odin Blog";
   }, []);
-
-  const handleSubmittemp = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-
-    const data = {
-      user: {
-        username: formData.get("username"),
-        email: formData.get("email"),
-        first_name: formData.get("first_name"),
-        last_name: formData.get("last_name"),
-        password: formData.get("password"),
-      },
-    };
-
-    try {
-      const res = await fetch(`${API_URL}/users`, {
-        method: "POST",
-        headers: {
-          "cache-control": "no-cache",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      console.log(res);
-    } catch (error) {
-      console.log("post error", error);
-    }
-  };
 
   return (
     <section className={styles.formWrapper}>
@@ -209,7 +216,7 @@ export default function SignUp() {
             Sign up
           </button>
         </div>
-        <ErrorMessage error={error} />
+        {error && <ErrorMessage error={error} />}
       </form>
     </section>
   );
@@ -218,11 +225,14 @@ export default function SignUp() {
 const ErrorMessage = ({ error }) => {
   return (
     <>
-      {error && (
-        <div>
-          <p>Error message</p>
-        </div>
-      )}
+      {Object.keys(error).map((field, index) => {
+        return (
+          <p
+            className={styles.serverError}
+            key={index}
+          >{`${field} is ${error[field]}`}</p>
+        );
+      })}
     </>
   );
 };

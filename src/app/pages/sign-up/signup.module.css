@@ -53,3 +53,11 @@
 .formWrapper input {
   @apply w-full rounded-lg text-light-text;
 }
+
+.serverError {
+  @apply mt-4 text-xs text-red-600;
+}
+
+.serverError:first-letter {
+  @apply uppercase;
+}
