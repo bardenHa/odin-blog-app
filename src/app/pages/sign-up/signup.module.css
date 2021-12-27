@@ -15,7 +15,7 @@
 }
 
 .formHeader a {
-  @apply text-blue-500;
+  @apply text-blue-500 hover:underline;
 }
 
 .form input {

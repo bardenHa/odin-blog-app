@@ -75,8 +75,7 @@ export default function SignUp() {
       <div className={styles.formHeader}>
         <h2>Sign up</h2>
         <p>
-          Already have an account?
-          <a href="/sign-in"> Sign in</a>.
+          Already have an account? <a href="/sign-in">Sign in</a>.
         </p>
       </div>
       <form
