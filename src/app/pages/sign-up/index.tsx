@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 import { API_URL } from "constants/urls";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { VALIDATION_MESSAGES } from "constants/validation-messages";
 
 type Inputs = {
   email: string;
@@ -10,12 +11,6 @@ type Inputs = {
   last_name: string;
   password: string;
   password_confirmation: string;
-};
-
-const VALIDATION_MESSAGES = {
-  REQUIRED: "This field is required.",
-  MAX_LENGTH: "This field contains too many characters.",
-  PASSWORD_CONFIRMATION: "Passwords must match.",
 };
 
 export default function SignUp() {
@@ -27,7 +22,6 @@ export default function SignUp() {
   } = useForm<Inputs>();
 
   const [error, setError] = useState(null);
-  // const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formData = {
