@@ -63,7 +63,7 @@
     "eslint": "^8.1.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-hooks": "^4.2.1-rc.0-next-3dc41d8a2-20211223",
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1",
