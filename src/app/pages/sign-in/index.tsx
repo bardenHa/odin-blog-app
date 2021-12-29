@@ -19,10 +19,9 @@ export default function SignUp() {
   const [error, setError] = useState(null);
 
   const authReq = () => {
-    fetch(`${API_URL}/feed`, {
+    fetch(`${API_URL}/articles/feed`, {
       method: "GET",
       headers: {
-        pragma: "no-cache",
         "Cache-Control": "no-cache",
       },
     })
@@ -33,11 +32,12 @@ export default function SignUp() {
         return response.json();
       })
       .then((data) => {
-        setError(null);
-        console.log("req data", data);
+        console.log("auth data", data);
       })
       .catch((error) => {
-        console.log(error);
+        error.then((err) => {
+          console.log("auth", err);
+        });
       });
   };
 
@@ -66,8 +66,6 @@ export default function SignUp() {
       .then((data) => {
         setError(null);
         console.log("data", data);
-
-        authReq();
       })
       .catch((error) => {
         error.then((errorObject: object) => {
@@ -145,6 +143,15 @@ export default function SignUp() {
         </div>
         {error && <ErrorMessage error={error} />}
       </form>
+      <div className={styles.signinButtonWrapper}>
+        <button
+          name="button2"
+          className={styles.signinButton}
+          onClick={authReq}
+        >
+          Auth route
+        </button>
+      </div>
     </section>
   );
 }
