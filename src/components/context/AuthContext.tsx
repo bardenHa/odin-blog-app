@@ -48,30 +48,31 @@ export const AuthProvider = (props) => {
     return user;
   };
 
-  const checkUserLoggedIn = async () => {
-    try {
-      setLoading(true);
-
-      const userLoggedIn = await getUser();
-
-      if (userLoggedIn) {
-        const { email } = userLoggedIn;
-        setUser(email);
-      }
-    } catch (error) {
-      console.log(error);
-
-      // logoutUser()
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const checkUserLoggedIn = async () => {
+      try {
+        setLoading(true);
+
+        const userLoggedIn = await getUser();
+
+        if (userLoggedIn) {
+          const { email } = userLoggedIn;
+          setUser(email);
+        }
+      } catch (error) {
+        console.log(error);
+        setError(error);
+
+        // logoutUser()
+      }
+      setLoading(false);
+    };
+
     checkUserLoggedIn();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, error }}>
       {props.children}
     </AuthContext.Provider>
   );
