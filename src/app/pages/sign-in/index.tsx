@@ -83,78 +83,86 @@ export default function SignUp() {
   }, []);
 
   return (
-    <section className={styles.formWrapper}>
-      <div className={styles.formHeader}>
-        <h2>Sign in</h2>
-        {user ? <h3>{user}</h3> : loading ? <h3>loading</h3> : <h3>No user</h3>}
-        <p>
-          Need an account? <a href="/sign-up">Sign up</a>.
-        </p>
-      </div>
-      <form
-        className={styles.form}
-        id="sign_in"
-        acceptCharset="UTF-8"
-        method="post"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className={styles.formField}>
-          <label htmlFor="user_email">Email</label>
-          <input
-            autoFocus={true}
-            autoComplete="email"
-            required={true}
-            type="email"
-            name="email"
-            className={styles.emailInput}
-            {...register("email", {
-              required: VALIDATION_MESSAGES.REQUIRED,
-              maxLength: {
-                value: 100,
-                message: VALIDATION_MESSAGES.MAX_LENGTH,
-              },
-            })}
-          />
-          {errors.email && <span>{errors.email.message}</span>}
+    <section className={styles.section}>
+      <div className={styles.formWrapper}>
+        <div className={styles.formHeader}>
+          <h2>Sign in</h2>
+          {user ? (
+            <h3>{user}</h3>
+          ) : loading ? (
+            <h3>loading</h3>
+          ) : (
+            <h3>No user</h3>
+          )}
+          <p>
+            Need an account? <a href="/sign-up">Sign up</a>.
+          </p>
         </div>
+        <form
+          className={styles.form}
+          id="sign_in"
+          acceptCharset="UTF-8"
+          method="post"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className={styles.formField}>
+            <label htmlFor="user_email">Email</label>
+            <input
+              autoFocus={true}
+              autoComplete="email"
+              required={true}
+              type="email"
+              name="email"
+              className={styles.emailInput}
+              {...register("email", {
+                required: VALIDATION_MESSAGES.REQUIRED,
+                maxLength: {
+                  value: 100,
+                  message: VALIDATION_MESSAGES.MAX_LENGTH,
+                },
+              })}
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+          </div>
 
-        <div className={styles.passwordField}>
-          <label className="mb-0" htmlFor="user_password">
-            Password
-          </label>
-          <input
-            className="js-password-strength"
-            autoComplete="off"
-            required
-            type="password"
-            name="password"
-            id="user_password"
-            spellCheck="false"
-            {...register("password", {
-              required: VALIDATION_MESSAGES.REQUIRED,
-              maxLength: {
-                value: 150,
-                message: VALIDATION_MESSAGES.MAX_LENGTH,
-              },
-            })}
-          />
-          {errors.password && <span>{errors.password.message}</span>}
-        </div>
+          <div className={styles.passwordField}>
+            <label className="mb-0" htmlFor="user_password">
+              Password
+            </label>
+            <input
+              className="js-password-strength"
+              autoComplete="off"
+              required
+              type="password"
+              name="password"
+              id="user_password"
+              spellCheck="false"
+              {...register("password", {
+                required: VALIDATION_MESSAGES.REQUIRED,
+                maxLength: {
+                  value: 150,
+                  message: VALIDATION_MESSAGES.MAX_LENGTH,
+                },
+              })}
+            />
+            {errors.password && <span>{errors.password.message}</span>}
+          </div>
+          <div className={styles.signinButtonWrapper}>
+            <button name="button" type="submit" className={styles.signinButton}>
+              Sign in
+            </button>
+          </div>
+          {error && <ErrorMessage error={error} />}
+        </form>
         <div className={styles.signinButtonWrapper}>
-          <button name="button" type="submit" className={styles.signinButton}>
-            Sign in
+          <button
+            name="button2"
+            className={styles.signinButton}
+            onClick={authReq}
+          >
+            Auth route
           </button>
         </div>
-        {error && <ErrorMessage error={error} />}
-      </form>
-      <div className={styles.signinButtonWrapper}>
-        <button
-          name="button2"
-          className={styles.signinButton}
-          onClick={authReq}
-        >
-          Auth route
-        </button>
       </div>
     </section>
   );

@@ -1,11 +1,16 @@
+.home {
+  flex: 1;
+}
+
 .main {
-  @apply px-4 min-h-screen space-y-16 w-full bg-light-theme;
+  @apply px-4 flex flex-col w-full bg-light-theme min-h-full;
   background-image: radial-gradient(hsla(0, 0%, 84.3%, 0.25) 1px, transparent 0),
     radial-gradient(hsla(0, 0%, 84.3%, 0.1) 1px, transparent 0);
   background-size: 50px 50px;
   background-position: 0 0, 25px 25px;
   -webkit-animation: slide 2s linear infinite;
   animation: slide 4s linear infinite;
+  flex: 1;
 }
 
 :global(.dark) .main {
@@ -51,7 +56,7 @@
 }
 
 .copy {
-  @apply max-w-screen-lg xl:max-w-screen-xl mx-auto;
+  @apply w-full max-w-screen-lg xl:max-w-screen-xl mx-auto mb-6;
 }
 
 .copyInner {
@@ -59,7 +64,7 @@
 }
 
 .features {
-  @apply max-w-screen-lg xl:max-w-screen-xl mx-auto grid grid-cols-1 gap-4;
+  @apply w-full max-w-screen-lg xl:max-w-screen-xl mx-auto grid grid-cols-1 gap-4 mb-6;
 }
 
 .cardWrapper {
@@ -92,7 +97,7 @@
 }
 
 .footer {
-  @apply pb-16 max-w-screen-lg xl:max-w-screen-xl mx-auto text-center text-gray-400 font-bold;
+  @apply w-full pb-16 max-w-screen-lg xl:max-w-screen-xl mx-auto text-center text-gray-400 font-bold;
 }
 
 .anchorLink {

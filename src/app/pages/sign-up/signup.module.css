@@ -1,5 +1,9 @@
+.section {
+  @apply flex flex-auto justify-center;
+}
+
 .formWrapper {
-  @apply flex flex-col justify-center align-middle max-w-2xl md:py-12 mx-auto w-full h-full py-4 min-h-screen text-light-text;
+  @apply self-center max-w-2xl md:py-12 w-full text-light-text;
 }
 
 .formHeader {
