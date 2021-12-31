@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { API_URL } from "constants/urls";
 import { useNavigate } from "react-router-dom";
+import * as ROUTES from "constants/routes";
 
 const AuthContext = createContext(null);
 
@@ -22,8 +23,6 @@ export const AuthProvider = (props) => {
   //   };
 
   const logoutUser = async () => {
-    console.log("test");
-
     try {
       await fetch(`${API_URL}/users/logout`, {
         method: "POST",
@@ -32,7 +31,7 @@ export const AuthProvider = (props) => {
         },
       });
       setUser(null);
-      navigate("/");
+      navigate(ROUTES.HOMEPAGE);
     } catch (error) {
       console.error(error);
     }
@@ -46,6 +45,10 @@ export const AuthProvider = (props) => {
       },
     })
       .then((response) => {
+        if (response.status === 401) {
+          return;
+        }
+
         if (!response.ok) {
           throw response.json();
         }
@@ -53,7 +56,7 @@ export const AuthProvider = (props) => {
       })
       .catch((error) => {
         error.then((err) => {
-          console.log("auth", err);
+          console.log("checkUserLoggedIn", err);
         });
       });
 
