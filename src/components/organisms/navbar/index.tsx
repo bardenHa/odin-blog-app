@@ -5,6 +5,14 @@ import Loader from "components/atoms/loader";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
 
+interface user {
+  email: string;
+  first_name: string;
+  last_name: string;
+  username: string;
+  token: string;
+}
+
 const Header = () => {
   const { user, loading } = useContext(AuthContext);
 
@@ -27,14 +35,14 @@ const Header = () => {
   );
 };
 
-const loggedInLinks = (user: object) => {
+const loggedInLinks = (user: user) => {
   return (
     <>
       <div className={styles.userContainer}>
         <p className={styles.welcome}>
           Welcome,{" "}
           <a className={styles.user} href="/">
-            {user}
+            {user.email}
           </a>
         </p>
         <a href="/">

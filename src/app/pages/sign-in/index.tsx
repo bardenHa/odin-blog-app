@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import styles from "./signin.module.css";
 import { API_URL } from "constants/urls";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { VALIDATION_MESSAGES } from "constants/validation-messages";
-import AuthContext from "components/context/AuthContext";
 
 type Inputs = {
   email: string;
@@ -18,8 +17,6 @@ export default function SignUp() {
   } = useForm<Inputs>();
 
   const [error, setError] = useState(null);
-
-  const { user, loading } = useContext(AuthContext);
 
   const authReq = () => {
     fetch(`${API_URL}/user`, {
@@ -87,13 +84,6 @@ export default function SignUp() {
       <div className={styles.formWrapper}>
         <div className={styles.formHeader}>
           <h2>Sign in</h2>
-          {user ? (
-            <h3>{user}</h3>
-          ) : loading ? (
-            <h3>loading</h3>
-          ) : (
-            <h3>No user</h3>
-          )}
           <p>
             Need an account? <a href="/sign-up">Sign up</a>.
           </p>

@@ -28,8 +28,7 @@
 }
 
 .home {
-  @apply /* transition-opacity ease-in-out duration-700 opacity-0 md:opacity-100 invisible absolute md:visible md:static md:inline */
-  pr-5 md:pr-8;
+  @apply pr-5 md:pr-8;
 }
 
 .welcome {

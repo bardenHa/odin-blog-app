@@ -56,8 +56,8 @@ export const AuthProvider = (props) => {
         const userLoggedIn = await getUser();
 
         if (userLoggedIn) {
-          const { email } = userLoggedIn;
-          setUser(email);
+          const user = userLoggedIn;
+          setUser(user);
         }
       } catch (error) {
         console.log(error);
