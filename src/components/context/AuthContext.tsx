@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { API_URL } from "constants/urls";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
@@ -7,6 +8,8 @@ export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   //   const loginUser = async (email) => {
   //     try {
@@ -18,13 +21,22 @@ export const AuthProvider = (props) => {
   //     }
   //   };
 
-  //   const logoutUser = async () => {
-  //     try {
-  //       await magic.user.logout();
-  //       setUser(null);
-  //       router.push("/");
-  //     } catch (error) {}
-  //   };
+  const logoutUser = async () => {
+    console.log("test");
+
+    try {
+      await fetch(`${API_URL}/users/logout`, {
+        method: "POST",
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getUser = async () => {
     const user = fetch(`${API_URL}/user`, {
@@ -72,7 +84,7 @@ export const AuthProvider = (props) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, error }}>
+    <AuthContext.Provider value={{ user, loading, error, logoutUser }}>
       {props.children}
     </AuthContext.Provider>
   );

@@ -4,7 +4,6 @@ import ThemeToggle from "components/atoms/theme-toggle";
 import Loader from "components/atoms/loader";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
-
 interface user {
   email: string;
   first_name: string;
@@ -14,13 +13,17 @@ interface user {
 }
 
 const Header = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, logoutUser } = useContext(AuthContext);
+
+  const handleLogout: () => void = async () => {
+    await logoutUser();
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.linkContainer}>
         {user ? (
-          loggedInLinks(user)
+          loggedInLinks(user, handleLogout)
         ) : loading ? (
           <div className={styles.loadingUser}>
             <span>Loading</span>
@@ -35,7 +38,7 @@ const Header = () => {
   );
 };
 
-const loggedInLinks = (user: user) => {
+const loggedInLinks = (user: user, handleLogout: () => void) => {
   return (
     <>
       <div className={styles.userContainer}>
@@ -53,7 +56,9 @@ const loggedInLinks = (user: user) => {
         <a className={styles.home} href={ROUTES.HOMEPAGE}>
           Home
         </a>
-        <button className={styles.signOut}>Sign Out</button>
+        <button className={styles.signOut} onClick={handleLogout}>
+          Sign Out
+        </button>
       </div>
     </>
   );
