@@ -1,0 +1,23 @@
+.loader {
+  @apply animate-spin h-5 w-5 ml-2 text-light-text;
+}
+
+.suspenseLoader {
+  @apply h-16 w-16 ml-0;
+}
+
+:global(.dark) .loader {
+  @apply text-dark-text;
+}
+
+:global(.dark) .suspenseLoader {
+  @apply text-dark-text;
+}
+
+.loader circle {
+  @apply opacity-25;
+}
+
+.loader path {
+  @apply opacity-75;
+}

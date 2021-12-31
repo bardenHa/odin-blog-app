@@ -4,6 +4,7 @@ import * as ROUTES from "constants/routes";
 
 import styles from "./app.module.css";
 import Header from "components/organisms/navbar";
+import SuspenseLoader from "components/organisms/suspense-loader";
 
 const Signin = lazy(() => import("./pages/sign-in"));
 const Signup = lazy(() => import("./pages/sign-up"));
@@ -14,7 +15,7 @@ export default function App() {
     <main className={styles.main}>
       <Header />
       <Router>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<SuspenseLoader />}>
           <Routes>
             <Route path={ROUTES.SIGNIN} element={<Signin />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />

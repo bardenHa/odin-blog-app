@@ -1,3 +1,35 @@
 .header {
-  @apply flex space-x-4 z-50 top-10 py-3;
+  @apply mx-auto w-full flex z-50 top-10 py-4 max-w-screen-lg xl:max-w-screen-xl text-sm md:text-base;
+}
+
+.header a {
+  @apply cursor-pointer hover:text-blue-600;
+}
+
+.header button {
+  @apply hover:text-blue-600 cursor-pointer;
+}
+
+.linkContainer {
+  @apply flex flex-grow space-x-6 justify-between items-center;
+}
+
+.signOut {
+  @apply pr-4 md:pr-8;
+}
+
+:global(.dark) .linkContainer {
+  @apply text-dark-text;
+}
+
+.loadingUser {
+  @apply flex items-center;
+}
+
+.home {
+  @apply hidden md:inline pr-8;
+}
+
+.user {
+  @apply text-blue-600;
 }
