@@ -1,5 +1,5 @@
 .toggleIconContainer {
-  @apply cursor-pointer;
+  @apply cursor-pointer items-center flex;
 }
 
 .toggleIcon {

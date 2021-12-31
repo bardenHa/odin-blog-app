@@ -1,5 +1,6 @@
 .header {
-  @apply mx-auto w-full flex z-50 top-10 py-4 max-w-screen-lg xl:max-w-screen-xl text-sm md:text-base;
+  transition: font-size;
+  @apply h-16 duration-300 ease-in-out mx-auto w-full flex z-50 top-10 py-4 max-w-screen-lg xl:max-w-screen-xl text-sm md:text-base;
 }
 
 .header a {
@@ -27,9 +28,22 @@
 }
 
 .home {
-  @apply hidden md:inline pr-8;
+  @apply /* transition-opacity ease-in-out duration-700 opacity-0 md:opacity-100 invisible absolute md:visible md:static md:inline */
+  pr-5 md:pr-8;
+}
+
+.welcome {
+  @apply hidden sm:block;
 }
 
 .user {
   @apply text-blue-600;
+}
+
+.userIcon {
+  @apply w-8 h-8 sm:hidden;
+}
+
+.userContainer {
+  @apply flex;
 }

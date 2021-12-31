@@ -19,12 +19,7 @@ const Header = () => {
             <Loader />
           </div>
         ) : (
-          <div>
-            <a className={styles.home} href={ROUTES.HOMEPAGE}>
-              Home
-            </a>
-            <a href={ROUTES.SIGNIN}>Sign In</a>
-          </div>
+          loggedOutLinks()
         )}
       </div>
       <ThemeToggle />
@@ -35,12 +30,17 @@ const Header = () => {
 const loggedInLinks = (user: object) => {
   return (
     <>
-      <p>
-        Welcome,{" "}
-        <a className={styles.user} href="/">
-          {user}
+      <div className={styles.userContainer}>
+        <p className={styles.welcome}>
+          Welcome,{" "}
+          <a className={styles.user} href="/">
+            {user}
+          </a>
+        </p>
+        <a href="/">
+          <UserIcon />
         </a>
-      </p>
+      </div>
       <div>
         <a className={styles.home} href={ROUTES.HOMEPAGE}>
           Home
@@ -51,4 +51,34 @@ const loggedInLinks = (user: object) => {
   );
 };
 
+const loggedOutLinks = () => {
+  return (
+    <div>
+      <a className={styles.home} href={ROUTES.HOMEPAGE}>
+        Home
+      </a>
+      <a href={ROUTES.SIGNIN}>Sign In</a>
+    </div>
+  );
+};
+
 export default Header;
+
+const UserIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={styles.userIcon}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  );
+};
