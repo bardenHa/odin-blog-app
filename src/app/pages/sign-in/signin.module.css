@@ -46,6 +46,10 @@
   @apply flex justify-between;
 }
 
+.signinButtonWrapper svg {
+  @apply inline;
+}
+
 .signinButton {
   @apply w-full py-2.5 rounded-lg mt-16 bg-blue-600 text-dark-text;
 }

@@ -13,7 +13,7 @@ interface user {
 }
 
 const Header = () => {
-  const { user, loading, logoutUser } = useContext(AuthContext);
+  const { user, refreshing, logoutUser } = useContext(AuthContext);
 
   const handleLogout: () => void = async () => {
     await logoutUser();
@@ -24,7 +24,7 @@ const Header = () => {
       <div className={styles.linkContainer}>
         {user ? (
           loggedInLinks(user, handleLogout)
-        ) : loading ? (
+        ) : refreshing ? (
           <div className={styles.loadingUser}>
             <span>Loading</span>
             <Loader />

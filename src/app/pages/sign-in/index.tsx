@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import styles from "./signin.module.css";
 import { API_URL } from "constants/urls";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { VALIDATION_MESSAGES } from "constants/validation-messages";
+import AuthContext from "components/context/AuthContext";
+import Loader from "components/atoms/loader";
 
 type Inputs = {
   email: string;
@@ -10,13 +12,13 @@ type Inputs = {
 };
 
 export default function SignUp() {
+  const { error, loading, loginUser } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
-  const [error, setError] = useState(null);
 
   const authReq = () => {
     fetch(`${API_URL}/user`, {
@@ -49,30 +51,7 @@ export default function SignUp() {
       },
     };
 
-    fetch(`${API_URL}/users/login`, {
-      method: "POST",
-      headers: {
-        "cache-control": "no-cache",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw response.json();
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setError(null);
-        console.log("data", data);
-      })
-      .catch((error) => {
-        error.then((errorObject: object) => {
-          const errorMessages = errorObject[Object.keys(errorObject)[0]];
-          setError(errorMessages);
-        });
-      });
+    loginUser(formData);
   };
 
   useEffect(() => {
@@ -140,6 +119,7 @@ export default function SignUp() {
           <div className={styles.signinButtonWrapper}>
             <button name="button" type="submit" className={styles.signinButton}>
               Sign in
+              {loading && <Loader />}
             </button>
           </div>
           {error && <ErrorMessage error={error} />}

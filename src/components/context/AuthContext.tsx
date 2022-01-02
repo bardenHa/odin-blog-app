@@ -9,18 +9,42 @@ export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const navigate = useNavigate();
 
-  //   const loginUser = async (email) => {
-  //     try {
-  //       await magic.auth.loginWithMagicLink({ email });
-  //       setUser({ email });
-  //       router.push("/");
-  //     } catch (error) {
-  //       setUser(null);
-  //     }
-  //   };
+  const loginUser = async (formData: object) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const user = await fetch(`${API_URL}/users/login`, {
+        method: "POST",
+        headers: {
+          "cache-control": "no-cache",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw response.json();
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          error.then((errorObject: object) => {
+            const errorMessages = errorObject[Object.keys(errorObject)[0]];
+            setError(errorMessages);
+          });
+        });
+
+      setUser(user);
+      navigate(ROUTES.HOMEPAGE);
+    } catch (error) {
+      setUser(null);
+    }
+    setLoading(false);
+  };
 
   const logoutUser = async () => {
     try {
@@ -66,28 +90,31 @@ export const AuthProvider = (props) => {
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
-        setLoading(true);
+        setRefreshing(true);
+        setError(null);
 
         const userLoggedIn = await getUser();
 
         if (userLoggedIn) {
           const user = userLoggedIn;
+          console.log(user);
+
           setUser(user);
         }
       } catch (error) {
         console.log(error);
         setError(error);
-
-        // logoutUser()
       }
-      setLoading(false);
+      setRefreshing(false);
     };
 
     checkUserLoggedIn();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, logoutUser }}>
+    <AuthContext.Provider
+      value={{ user, loading, refreshing, error, loginUser, logoutUser }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
