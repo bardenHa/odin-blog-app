@@ -3,15 +3,60 @@ import { API_URL } from "constants/urls";
 import { useNavigate } from "react-router-dom";
 import * as ROUTES from "constants/routes";
 
+interface user {
+  email: string;
+  first_name: string;
+  last_name: string;
+  username: string;
+  token: string;
+  bio: string;
+  image: string;
+}
+
 const AuthContext = createContext(null);
 
 export const AuthProvider = (props) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<user | null>(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const navigate = useNavigate();
+
+  const signUpUser = async (formData: object) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "cache-control": "no-cache",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw response.json();
+          }
+          return response.json();
+        })
+        .then((user: user) => {
+          setUser(user);
+          navigate(ROUTES.HOMEPAGE);
+        })
+        .catch((error) => {
+          error.then((errorObject: object) => {
+            const errorMessages = errorObject[Object.keys(errorObject)[0]];
+            setError(errorMessages);
+          });
+        });
+    } catch (error) {
+      setUser(null);
+    }
+    setLoading(false);
+  };
 
   const loginUser = async (formData: object) => {
     try {
@@ -31,15 +76,16 @@ export const AuthProvider = (props) => {
           }
           return response.json();
         })
+        .then((user: user) => {
+          setUser(user);
+          navigate(ROUTES.HOMEPAGE);
+        })
         .catch((error) => {
           error.then((errorObject: object) => {
             const errorMessages = errorObject[Object.keys(errorObject)[0]];
             setError(errorMessages);
           });
         });
-
-      setUser(user);
-      navigate(ROUTES.HOMEPAGE);
     } catch (error) {
       setUser(null);
     }
@@ -103,7 +149,6 @@ export const AuthProvider = (props) => {
         }
       } catch (error) {
         console.log(error);
-        setError(error);
       }
       setRefreshing(false);
     };
@@ -113,7 +158,15 @@ export const AuthProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, refreshing, error, loginUser, logoutUser }}
+      value={{
+        user,
+        loading,
+        refreshing,
+        error,
+        signUpUser,
+        loginUser,
+        logoutUser,
+      }}
     >
       {props.children}
     </AuthContext.Provider>
