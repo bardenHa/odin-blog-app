@@ -62,7 +62,8 @@ export const AuthProvider = (props) => {
     try {
       setLoading(true);
       setError(null);
-      const user = await fetch(`${API_URL}/users/login`, {
+
+      await fetch(`${API_URL}/users/login`, {
         method: "POST",
         headers: {
           "cache-control": "no-cache",
@@ -143,7 +144,6 @@ export const AuthProvider = (props) => {
 
         if (userLoggedIn) {
           const user = userLoggedIn;
-          console.log(user);
 
           setUser(user);
         }
