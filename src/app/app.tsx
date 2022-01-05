@@ -1,8 +1,11 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import * as ROUTES from "constants/routes";
+import { AuthProvider } from "components/context/AuthContext";
 
 import styles from "./app.module.css";
+import Header from "components/organisms/navbar";
+import SuspenseLoader from "components/organisms/suspense-loader";
 
 const Signin = lazy(() => import("./pages/sign-in"));
 const Signup = lazy(() => import("./pages/sign-up"));
@@ -12,13 +15,16 @@ export default function App() {
   return (
     <main className={styles.main}>
       <Router>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Routes>
-            <Route path={ROUTES.SIGNIN} element={<Signin />} />
-            <Route path={ROUTES.SIGNUP} element={<Signup />} />
-            <Route path={ROUTES.HOMEPAGE} element={<Home />} />
-          </Routes>
-        </Suspense>
+        <AuthProvider>
+          <Header />
+          <Suspense fallback={<SuspenseLoader />}>
+            <Routes>
+              <Route path={ROUTES.SIGNIN} element={<Signin />} />
+              <Route path={ROUTES.SIGNUP} element={<Signup />} />
+              <Route path={ROUTES.HOMEPAGE} element={<Home />} />
+            </Routes>
+          </Suspense>
+        </AuthProvider>
       </Router>
     </main>
   );

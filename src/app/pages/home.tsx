@@ -141,7 +141,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <>
+    <div className={styles.home}>
       <header className={styles.header}>
         <h1 className={styles.headerTitle}>Odin Blog</h1>
         <p className={styles.headerDescription}>
@@ -208,7 +208,7 @@ const Home = (): JSX.Element => {
           Harry Barden @ {new Date().getFullYear()}
         </a>
       </footer>
-    </>
+    </div>
   );
 };
 

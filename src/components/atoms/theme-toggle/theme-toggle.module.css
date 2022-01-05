@@ -1,5 +1,5 @@
 .toggleIconContainer {
-  @apply fixed top-10 right-10 cursor-pointer z-50;
+  @apply cursor-pointer items-center flex;
 }
 
 .toggleIcon {
