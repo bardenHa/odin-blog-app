@@ -1,0 +1,47 @@
+.profileSection {
+  @apply flex flex-auto justify-center w-full my-4;
+}
+
+.profileContainer {
+  @apply bg-black bg-opacity-5 w-full max-w-3xl p-6 space-y-4 rounded-2xl flex flex-col items-center;
+  height: max-content;
+}
+
+.profileContainer h2 {
+  @apply capitalize font-bold md:text-2xl;
+}
+
+:global(.dark) .profileContainer {
+  @apply bg-white bg-opacity-5;
+}
+
+:global(.dark) .profileSection {
+  @apply text-dark-text;
+}
+
+.imageContainer {
+  @apply w-40 md:w-60;
+  clip-path: circle(60px at center);
+}
+
+@media (min-width: 767px) {
+  .imageContainer {
+    clip-path: circle(100px at center);
+  }
+}
+
+.bio {
+  @apply text-xs md:text-sm lg:text-base;
+}
+
+.followButton {
+  @apply w-32 p-2.5 text-sm md:text-base rounded-lg bg-blue-600 text-dark-text flex justify-center items-center;
+}
+
+.followButton svg {
+  @apply inline;
+}
+
+.profileSection .profileContainer .followButton {
+  @apply mt-10;
+}
