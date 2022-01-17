@@ -14,7 +14,10 @@ interface profile {
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
+  const [articles, setArticles] = useState([]);
+
   const [fetching, setFetching] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const { username } = useParams();
@@ -33,8 +36,9 @@ export default function Profile() {
         }
         return response.json();
       })
-      .then((profile) => {
-        setProfile(profile);
+      .then((res) => {
+        setProfile(res.profile);
+        setArticles(res.posts);
       })
       .catch((error) => {
         console.log("getUserProfile", error);
@@ -87,15 +91,17 @@ const UserProfile: React.FC<{
   loading: boolean;
   handleFollow: () => void;
 }> = ({ profile, loading, handleFollow }) => {
-  profile.bio =
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit est quaerat nemo, ad provident error alias eos nesciunt dolorem distinctio ipsa numquam accusamus. Voluptatem temporibus quisquam molestiae libero consectetur maiores";
   return (
     <div className={styles.profileContainer}>
       <div className={styles.imageContainer}>
         <img src={profile.image} alt="User profile image" />
       </div>
       <h2>{profile.username}</h2>
-      {profile.bio && <p className={styles.bio}>{profile.bio}</p>}
+      {profile.bio ? (
+        <p className={styles.bio}>{profile.bio}</p>
+      ) : (
+        <p className={styles.bio}>No bio.</p>
+      )}
       <button className={styles.followButton} onClick={handleFollow}>
         <p>{profile.following ? "Unfollow" : "Follow"}</p>
         {loading && <Loader />}
