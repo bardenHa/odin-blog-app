@@ -3,7 +3,7 @@
 }
 
 .profileContainer {
-  @apply bg-black bg-opacity-5 w-full max-w-3xl p-6 space-y-4 rounded-2xl flex flex-col items-center;
+  @apply bg-black max-w-7xl bg-opacity-5 w-full container p-6 space-y-4 rounded-2xl flex flex-col items-center;
   height: max-content;
 }
 
