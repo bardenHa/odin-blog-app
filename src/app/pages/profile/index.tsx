@@ -5,6 +5,7 @@ import SuspenseLoader from "components/organisms/suspense-loader";
 import Loader from "components/atoms/loader";
 import styles from "./profile.module.css";
 import Card from "components/organisms/card";
+import * as ROUTES from "constants/routes";
 
 interface profile {
   username: string;
@@ -146,7 +147,11 @@ const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
             title={article.title}
             description={article.description}
             callToAction={
-              <Card.CallToAction as="a" href={article.slug} target="_blank">
+              <Card.CallToAction
+                as="a"
+                href={`${ROUTES.ARTICLE}/${article.slug}`}
+                target="_blank"
+              >
                 Visit article →
               </Card.CallToAction>
             }
