@@ -4,6 +4,7 @@ import ThemeToggle from "components/atoms/theme-toggle";
 import Loader from "components/atoms/loader";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
+import { Link } from "react-router-dom";
 interface user {
   email: string;
   first_name: string;
@@ -44,13 +45,13 @@ const loggedInLinks = (user: user, handleLogout: () => void) => {
       <div className={styles.userContainer}>
         <p className={styles.welcome}>
           Welcome,{" "}
-          <a className={styles.user} href="/">
-            {user.email}
-          </a>
+          <Link to={`user/${user.username}`} className={styles.user}>
+            {user.username}
+          </Link>
         </p>
-        <a href="/">
+        <Link to={`user/${user.username}`} className={styles.user}>
           <UserIcon />
-        </a>
+        </Link>
       </div>
       <div>
         <a className={styles.home} href={ROUTES.HOMEPAGE}>

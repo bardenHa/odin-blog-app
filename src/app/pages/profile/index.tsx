@@ -150,7 +150,6 @@ const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
               <Card.CallToAction
                 as="a"
                 href={`${ROUTES.ARTICLE}/${article.slug}`}
-                target="_blank"
               >
                 Visit article →
               </Card.CallToAction>
