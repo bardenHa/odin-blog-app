@@ -12,9 +12,24 @@ interface profile {
   following: boolean;
 }
 
+interface article {
+  comments: string[];
+  _id: string;
+  title: string;
+  description: string;
+  body: string;
+  favoritesCount: number;
+  tagList: string[];
+  author: string;
+  slug: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
 export default function Profile() {
-  const [profile, setProfile] = useState(null);
-  const [articles, setArticles] = useState([]);
+  const [profile, setProfile] = useState<profile | null>(null);
+  const [articles, setArticles] = useState<Array<article>>([]);
 
   const [fetching, setFetching] = useState(false);
 
@@ -64,25 +79,32 @@ export default function Profile() {
   }, [username]);
 
   return (
-    <section className={styles.profileSection}>
-      {fetching ? (
-        <SuspenseLoader />
-      ) : (
-        <>
-          {profile ? (
-            <UserProfile
-              profile={profile}
-              loading={loading}
-              handleFollow={handleFollow}
-            />
-          ) : (
-            <div>
-              <h1>No profile</h1>
-            </div>
-          )}
-        </>
-      )}
-    </section>
+    <>
+      <section className={styles.profileSection}>
+        {fetching ? (
+          <SuspenseLoader />
+        ) : (
+          <>
+            {profile ? (
+              <>
+                <UserProfile
+                  profile={profile}
+                  loading={loading}
+                  handleFollow={handleFollow}
+                />
+              </>
+            ) : (
+              <div>
+                <h1>No profile</h1>
+              </div>
+            )}
+          </>
+        )}
+      </section>
+      <section>
+        {!fetching && profile && <UserArticles articles={articles} />}
+      </section>
+    </>
   );
 }
 
@@ -107,5 +129,16 @@ const UserProfile: React.FC<{
         {loading && <Loader />}
       </button>
     </div>
+  );
+};
+
+const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
+  console.log(articles);
+
+  return (
+    <section>
+      <div>test</div>
+      <div>posts</div>
+    </section>
   );
 };
