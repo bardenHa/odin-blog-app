@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SuspenseLoader from "components/organisms/suspense-loader";
 import Loader from "components/atoms/loader";
 import styles from "./profile.module.css";
+import Card from "components/organisms/card";
 
 interface profile {
   username: string;
@@ -133,12 +134,25 @@ const UserProfile: React.FC<{
 };
 
 const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
-  console.log(articles);
-
   return (
-    <section>
-      <div>test</div>
-      <div>posts</div>
+    <section className={styles.articleSection}>
+      {articles.map((article, index) => (
+        <div
+          key={index}
+          className={styles.cardWrapper}
+          style={{ animationDelay: `${index * 0.1 + 0.1}s` }}
+        >
+          <Card
+            title={article.title}
+            description={article.description}
+            callToAction={
+              <Card.CallToAction as="a" href={article.slug} target="_blank">
+                Visit article →
+              </Card.CallToAction>
+            }
+          />
+        </div>
+      ))}
     </section>
   );
 };
