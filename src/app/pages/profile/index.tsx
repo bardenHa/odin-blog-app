@@ -66,7 +66,7 @@ export default function Profile() {
     setLoading(true);
 
     await fetch(`${API_URL}/profiles/${profile.username}/follow`, {
-      method: "POST",
+      method: profile.following ? "DELETE" : "POST",
       headers: {
         "Cache-Control": "no-cache",
         "Content-Type": "application/json",
@@ -78,9 +78,9 @@ export default function Profile() {
         }
         return response.json();
       })
-      .then((profile) => {
-        profile.following = true;
-        setProfile(profile);
+      .then((updatedProfile) => {
+        updatedProfile.following = profile.following ? false : true;
+        setProfile(updatedProfile);
       })
       .catch((error) => {
         console.log("followUser", error);
