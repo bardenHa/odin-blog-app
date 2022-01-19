@@ -49,7 +49,7 @@ const loggedInLinks = (user: user, handleLogout: () => void) => {
             {user.username}
           </Link>
         </p>
-        <Link to={`user/${user.username}`} className={styles.user}>
+        <Link to={`user/${user.username}`}>
           <UserIcon />
         </Link>
       </div>

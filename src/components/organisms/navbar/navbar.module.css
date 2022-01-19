@@ -35,6 +35,10 @@
   @apply hidden sm:block;
 }
 
+.user {
+  @apply text-blue-600;
+}
+
 .userIcon {
   @apply w-8 h-8 sm:hidden;
 }
