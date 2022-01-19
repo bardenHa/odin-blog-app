@@ -32,9 +32,7 @@ interface article {
 export default function Profile() {
   const [profile, setProfile] = useState<profile | null>(null);
   const [articles, setArticles] = useState<Array<article>>([]);
-
   const [fetching, setFetching] = useState(false);
-
   const [loading, setLoading] = useState(false);
 
   const { username } = useParams();
@@ -64,15 +62,31 @@ export default function Profile() {
     setFetching(false);
   };
 
-  const handleFollow = () => {
-    console.log("test");
-
+  const handleFollow = async () => {
     setLoading(true);
-    setTimeout(() => {
-      console.log("loading");
 
-      setLoading(false);
-    }, 2000);
+    await fetch(`${API_URL}/profiles/${profile.username}/follow`, {
+      method: "POST",
+      headers: {
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then((profile) => {
+        profile.following = true;
+        setProfile(profile);
+      })
+      .catch((error) => {
+        console.log("followUser", error);
+      });
+
+    setLoading(false);
   };
 
   useEffect(() => {
