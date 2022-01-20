@@ -96,6 +96,7 @@ export default function Profile() {
   useEffect(() => {
     setFetching(true);
     getUserProfile(username);
+    document.title = `${username} - Odin Blog`;
   }, [username]);
 
   return (
