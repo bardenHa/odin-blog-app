@@ -59,3 +59,7 @@
     @apply opacity-100;
   }
 }
+
+.link {
+  @apply text-blue-600 hover:underline;
+}

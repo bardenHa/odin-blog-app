@@ -5,13 +5,7 @@ import Loader from "components/atoms/loader";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
 import { Link } from "react-router-dom";
-interface user {
-  email: string;
-  first_name: string;
-  last_name: string;
-  username: string;
-  token: string;
-}
+import { user } from "components/types";
 
 const Header = () => {
   const { user, refreshing, logoutUser } = useContext(AuthContext);

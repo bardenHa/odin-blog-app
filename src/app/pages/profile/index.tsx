@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { API_URL } from "constants/urls";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import SuspenseLoader from "components/organisms/suspense-loader";
 import Loader from "components/atoms/loader";
 import styles from "./profile.module.css";
 import Card from "components/organisms/card";
+import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
+import { user } from "components/types";
 
 interface profile {
   username: string;
@@ -30,6 +32,8 @@ interface article {
 }
 
 export default function Profile() {
+  const { user } = useContext(AuthContext);
+
   const [profile, setProfile] = useState<profile | null>(null);
   const [articles, setArticles] = useState<Array<article>>([]);
   const [fetching, setFetching] = useState(false);
@@ -104,6 +108,7 @@ export default function Profile() {
             {profile ? (
               <>
                 <UserProfile
+                  user={user}
                   profile={profile}
                   loading={loading}
                   handleFollow={handleFollow}
@@ -125,10 +130,11 @@ export default function Profile() {
 }
 
 const UserProfile: React.FC<{
+  user: user;
   profile: profile;
   loading: boolean;
   handleFollow: () => void;
-}> = ({ profile, loading, handleFollow }) => {
+}> = ({ user, profile, loading, handleFollow }) => {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.imageContainer}>
@@ -140,10 +146,22 @@ const UserProfile: React.FC<{
       ) : (
         <p className={styles.bio}>No bio.</p>
       )}
-      <button className={styles.followButton} onClick={handleFollow}>
-        <p>{profile.following ? "Unfollow" : "Follow"}</p>
-        {loading && <Loader />}
-      </button>
+      {user ? (
+        user.username !== profile.username && (
+          <FollowButton
+            handleFollow={handleFollow}
+            profile={profile}
+            loading={loading}
+          />
+        )
+      ) : (
+        <p>
+          <Link to={`/${ROUTES.SIGNIN}`} className={styles.link}>
+            Sign in
+          </Link>{" "}
+          to follow this user.
+        </p>
+      )}
     </div>
   );
 };
@@ -172,5 +190,18 @@ const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
         </div>
       ))}
     </section>
+  );
+};
+
+const FollowButton: React.FC<{
+  handleFollow: () => void;
+  profile: profile;
+  loading: boolean;
+}> = ({ handleFollow, profile, loading }) => {
+  return (
+    <button className={styles.followButton} onClick={handleFollow}>
+      <p>{profile.following ? "Unfollow" : "Follow"}</p>
+      {loading && <Loader />}
+    </button>
   );
 };
