@@ -4,13 +4,8 @@ import ThemeToggle from "components/atoms/theme-toggle";
 import Loader from "components/atoms/loader";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
-interface user {
-  email: string;
-  first_name: string;
-  last_name: string;
-  username: string;
-  token: string;
-}
+import { Link } from "react-router-dom";
+import { user } from "components/types";
 
 const Header = () => {
   const { user, refreshing, logoutUser } = useContext(AuthContext);
@@ -44,13 +39,13 @@ const loggedInLinks = (user: user, handleLogout: () => void) => {
       <div className={styles.userContainer}>
         <p className={styles.welcome}>
           Welcome,{" "}
-          <a className={styles.user} href="/">
-            {user.email}
-          </a>
+          <Link to={`user/${user.username}`} className={styles.user}>
+            {user.username}
+          </Link>
         </p>
-        <a href="/">
+        <Link to={`user/${user.username}`}>
           <UserIcon />
-        </a>
+        </Link>
       </div>
       <div>
         <a className={styles.home} href={ROUTES.HOMEPAGE}>

@@ -10,6 +10,7 @@ import SuspenseLoader from "components/organisms/suspense-loader";
 const Signin = lazy(() => import("./pages/sign-in"));
 const Signup = lazy(() => import("./pages/sign-up"));
 const Home = lazy(() => import("./pages/home"));
+const Profile = lazy(() => import("./pages/profile"));
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
               <Route path={ROUTES.SIGNIN} element={<Signin />} />
               <Route path={ROUTES.SIGNUP} element={<Signup />} />
               <Route path={ROUTES.HOMEPAGE} element={<Home />} />
+              <Route path={ROUTES.PROFILE} element={<Profile />} />
             </Routes>
           </Suspense>
         </AuthProvider>

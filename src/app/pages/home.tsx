@@ -195,7 +195,7 @@ const Home = (): JSX.Element => {
               description={props.description}
               icon={props.author.image}
               callToAction={
-                <Card.CallToAction as="a" href={props.slug} target="_blank">
+                <Card.CallToAction as="a" href={`/article/${props.slug}`}>
                   Visit article →
                 </Card.CallToAction>
               }

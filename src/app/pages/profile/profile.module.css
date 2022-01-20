@@ -1,0 +1,65 @@
+.profileSection {
+  @apply flex justify-center w-full my-4;
+}
+
+.profileContainer {
+  @apply bg-white bg-opacity-5 w-full container max-w-screen-lg xl:max-w-screen-xl shadow-md p-6 space-y-4 rounded-md flex flex-col items-center;
+}
+
+.profileContainer h2 {
+  @apply capitalize font-bold md:text-2xl;
+}
+
+:global(.dark) .profileContainer {
+  @apply bg-white bg-opacity-5;
+}
+
+:global(.dark) .profileSection {
+  @apply text-dark-text;
+}
+
+.imageContainer {
+  @apply w-40 md:w-60;
+  clip-path: circle(60px at center);
+}
+
+@media (min-width: 767px) {
+  .imageContainer {
+    clip-path: circle(100px at center);
+  }
+}
+
+.bio {
+  @apply text-xs md:text-sm lg:text-base;
+}
+
+.followButton {
+  @apply w-32 p-2.5 text-sm md:text-base rounded-lg bg-blue-600 text-dark-text flex justify-center items-center;
+}
+
+.followButton svg {
+  @apply inline;
+}
+
+.profileSection .profileContainer .followButton {
+  @apply mt-10;
+}
+
+.articleSection {
+  @apply w-full max-w-screen-lg xl:max-w-screen-xl mx-auto grid grid-cols-1 gap-4 mt-6 mb-6;
+}
+
+.cardWrapper {
+  @apply col-span-1 opacity-0;
+  animation: show 0.5s forwards;
+}
+
+@keyframes show {
+  to {
+    @apply opacity-100;
+  }
+}
+
+.link {
+  @apply text-blue-600 hover:underline;
+}
