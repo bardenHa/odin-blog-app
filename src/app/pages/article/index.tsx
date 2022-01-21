@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { API_URL } from "constants/urls";
 import styles from "./article.module.css";
 import { useEffect, useState } from "react";
 import SuspenseLoader from "components/organisms/suspense-loader";
+import ReactMarkdown from "react-markdown";
 
 import { profile } from "components/types";
 
@@ -62,6 +63,15 @@ export default function Article() {
     getArticle(articleSlug);
   }, [articleSlug]);
 
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className={styles.articleContainer}>
       {fetching || !article ? (
@@ -78,14 +88,22 @@ export default function Article() {
                 />
               </div>
               <div className={styles.authorInfo}>
-                <h5>Test User</h5>
-                <small>February 14th, 2020</small>
+                <h5>
+                  <Link to={`/user/${article.author.username}`}>
+                    {article.author.username}
+                  </Link>
+                </h5>
+                <small>{formatDate(article.createdAt)}</small>
               </div>
             </div>
           </section>
           <section className={styles.contentSection}>
             <strong className={styles.excerpt}>{article.description}</strong>
-            <p>{article.body}</p>
+            <ReactMarkdown
+              components={{ h1: "h2", h2: "h3", h3: "h4", h4: "h5", h5: "h6" }}
+            >
+              {article.body}
+            </ReactMarkdown>
           </section>
           <section className={styles.commentSection}>
             <p>{articleSlug}</p>

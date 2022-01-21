@@ -39,5 +39,45 @@ section {
 }
 
 .contentSection {
-  @apply bg-white bg-opacity-5 shadow-md p-6 space-y-4 rounded-md text-sm md:text-base;
+  @apply bg-white shadow-md p-6 space-y-4 rounded-md text-sm md:text-base prose max-w-screen-lg xl:max-w-screen-xl;
+}
+
+.contentSection pre {
+  @apply bg-gray-100 text-light-text;
+}
+
+:global(.dark) .contentSection {
+  @apply bg-opacity-5 text-white;
+}
+
+:global(.dark) .contentSection h2 {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection h3 {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection h4 {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection h5 {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection p {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection strong {
+  @apply text-white;
+}
+
+:global(.dark) .contentSection a {
+  @apply text-blue-600 no-underline hover:underline;
+}
+
+:global(.dark) .contentSection pre {
+  @apply bg-dark-theme text-dark-text;
 }
