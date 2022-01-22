@@ -103,14 +103,42 @@ export default function Article() {
 }
 
 const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
+  const [writeComment, setWriteComment] = useState<boolean>(false);
+
   return (
     <>
-      <div className={styles.writeComment}>
-        <h2>Comments ({10})</h2>
-        <button className={styles.writeCommentButton}>
-          <PlusIcon />
-          Write a comment
-        </button>
+      <div className={styles.writeCommentContainer}>
+        <div className={styles.writeComment}>
+          <h2>Comments ({10})</h2>
+          <button
+            className={styles.commentButton}
+            onClick={() => setWriteComment(!writeComment)}
+          >
+            {writeComment ? <MinusIcon /> : <PlusIcon />}
+            Write a comment
+          </button>
+        </div>
+        <form
+          className={`${styles.writeCommentForm} ${
+            writeComment && styles.showHidden
+          }`}
+        >
+          <textarea
+            name="comment"
+            id="writeComment"
+            rows={5}
+            maxLength={600}
+            className={styles.writeCommentField}
+          ></textarea>
+          <button
+            type="submit"
+            name="submitComment"
+            className={styles.commentButton}
+          >
+            Post
+            <RightArrowIcon />
+          </button>
+        </form>
       </div>
       <div className={styles.comment}>
         <div className={styles.commentAuthorContainer}>
@@ -148,6 +176,40 @@ const PlusIcon = () => {
       <path
         fillRule="evenodd"
         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+const MinusIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-1 h-1"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+const RightArrowIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-1 h-1"
+      viewBox="0 0 12 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
         clipRule="evenodd"
       />
     </svg>

@@ -91,20 +91,41 @@ section {
   @apply pb-2;
 }
 
+.writeCommentContainer {
+  @apply my-6 bg-white bg-opacity-5 shadow-md p-6 rounded-md text-sm md:text-base max-w-screen-lg xl:max-w-screen-xl;
+}
+
 .writeComment {
-  @apply flex justify-between items-center my-6 bg-white bg-opacity-5 shadow-md p-6 rounded-md text-sm md:text-base max-w-screen-lg xl:max-w-screen-xl;
+  @apply flex justify-between items-center;
 }
 
 .writeComment h2 {
   @apply text-lg md:text-xl font-bold;
 }
 
-.writeCommentButton {
+.commentButton {
   @apply p-2 m-0 bg-blue-600 rounded-md flex items-center text-dark-text;
 }
 
-.writeCommentButton svg {
+.commentButton svg {
   @apply w-4 h-4 md:w-7 md:h-7;
+}
+
+.writeCommentField {
+  @apply w-full my-6 rounded-md text-light-text align-top;
+}
+
+.writeCommentForm {
+  @apply max-h-0 opacity-0 transition-all duration-500 ease-in-out;
+}
+
+.showHidden {
+  @apply max-h-screen opacity-100;
+}
+
+.writeCommentForm .commentButton {
+  @apply ml-auto bg-opacity-0 text-blue-600 border border-solid border-blue-600
+  hover:bg-opacity-100 hover:text-dark-text;
 }
 
 .comment {
