@@ -112,24 +112,28 @@ section {
 }
 
 .writeCommentField {
-  @apply w-full my-6 rounded-md text-light-text align-top;
+  @apply w-full my-6 rounded-md  align-top bg-white bg-opacity-10;
 }
 
 .writeCommentForm {
-  @apply max-h-0 opacity-0 transition-all duration-500 ease-in-out;
+  @apply fixed max-h-0 opacity-0 transition-all duration-500 ease-in-out;
 }
 
 .showHidden {
-  @apply max-h-screen opacity-100;
+  @apply relative max-h-screen opacity-100;
 }
 
 .writeCommentForm .commentButton {
-  @apply ml-auto bg-opacity-0 text-blue-600 border border-solid border-blue-600
+  @apply ml-auto bg-opacity-0 text-blue-600 border-2 border-solid border-blue-600
   hover:bg-opacity-100 hover:text-dark-text;
 }
 
 .comment {
-  @apply bg-white bg-opacity-5 shadow-md p-6 space-y-4 rounded-md text-sm md:text-base max-w-screen-lg xl:max-w-screen-xl;
+  @apply bg-white mb-6 bg-opacity-5 shadow-md p-6 rounded-md text-sm md:text-base max-w-screen-lg xl:max-w-screen-xl;
+}
+
+.comment:last-child {
+  @apply mb-0;
 }
 
 .commentAuthorContainer {
@@ -141,5 +145,5 @@ section {
 }
 
 .commentDescription {
-  @apply text-sm sm:text-base md:text-lg;
+  @apply pt-2 text-sm sm:text-base md:text-lg;
 }

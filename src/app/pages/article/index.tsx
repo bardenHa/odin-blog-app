@@ -102,14 +102,51 @@ export default function Article() {
   );
 }
 
+interface comment {
+  id: string;
+  body: string;
+  createdAt: Date;
+  author: profile;
+}
+
 const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
   const [writeComment, setWriteComment] = useState<boolean>(false);
+  const [comments, setComments] = useState<comment[] | null>(null);
+
+  const getComments = async (articleSlug: string) => {
+    await fetch(`${API_URL}/articles/${articleSlug}/comments`, {
+      method: "GET",
+      headers: {
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then((res) => {
+        setComments(res.comments);
+      })
+      .catch((error) => {
+        setComments(null);
+        console.log("getComments", error);
+      });
+  };
+
+  useEffect(() => {
+    getComments(article.slug);
+  }, [article]);
 
   return (
     <>
       <div className={styles.writeCommentContainer}>
         <div className={styles.writeComment}>
-          <h2>Comments ({10})</h2>
+          <h2>
+            Comments {comments && comments.length > 0 && `(${comments.length})`}
+          </h2>
           <button
             className={styles.commentButton}
             onClick={() => setWriteComment(!writeComment)}
@@ -140,27 +177,28 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
           </button>
         </form>
       </div>
-      <div className={styles.comment}>
-        <div className={styles.commentAuthorContainer}>
-          <div className={styles.commentImageContainer}>
-            <img src={article.author.image} alt="User profile image" />
+      {comments && comments.length > 0 ? (
+        comments.map((comment, index) => (
+          <div className={styles.comment} key={index}>
+            <div className={styles.commentAuthorContainer}>
+              <div className={styles.commentImageContainer}>
+                <img src={comment.author.image} alt="User profile image" />
+              </div>
+              <div className={styles.authorInfo}>
+                <h5>
+                  <Link to={`/user/${article.author.username}`}>
+                    {comment.author.username}
+                  </Link>
+                </h5>
+                <small>Aug 31</small>
+              </div>
+            </div>
+            <p className={styles.commentDescription}>{comment.body}</p>
           </div>
-          <div className={styles.authorInfo}>
-            <h5>
-              <Link to={`/user/${article.author.username}`}>
-                {article.author.username}
-              </Link>
-            </h5>
-            <small>Aug 31</small>
-          </div>
-        </div>
-        <p className={styles.commentDescription}>
-          Awesome Kieran Roberts! When I first started, I felt the same way
-          about doing things reactively rather than proactively. I'm glad to
-          hear that you're now taking on new challenges and growing a lot! Keep
-          it up, you're doing just great 🎉
-        </p>
-      </div>
+        ))
+      ) : (
+        <div className={styles.comment}>No comments</div>
+      )}
     </>
   );
 };
