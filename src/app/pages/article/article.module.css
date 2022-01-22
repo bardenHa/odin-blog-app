@@ -120,5 +120,5 @@ section {
 }
 
 .commentDescription {
-  @apply text-base md:text-lg;
+  @apply text-sm sm:text-base md:text-lg;
 }
