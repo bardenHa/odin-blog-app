@@ -35,7 +35,7 @@ section {
 }
 
 .excerpt {
-  @apply md:text-lg text-base;
+  @apply md:text-lg text-base italic opacity-50;
 }
 
 .contentSection {
@@ -44,6 +44,11 @@ section {
 
 .contentSection pre {
   @apply bg-gray-100 text-light-text;
+}
+
+.articleContainer .contentSection h2 {
+  @apply text-2xl md:text-3xl;
+  margin-top: 3rem !important;
 }
 
 :global(.dark) .contentSection {
