@@ -145,5 +145,5 @@ section {
 }
 
 .commentDescription {
-  @apply pt-2 text-sm sm:text-base md:text-lg;
+  @apply p-2 text-sm sm:text-base md:text-lg;
 }

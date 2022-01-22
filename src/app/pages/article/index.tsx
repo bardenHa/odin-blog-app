@@ -6,6 +6,8 @@ import SuspenseLoader from "components/organisms/suspense-loader";
 import ReactMarkdown from "react-markdown";
 
 import { profile } from "components/types";
+import Loader from "components/atoms/loader";
+
 interface articlePost {
   slug: string;
   title: string;
@@ -18,6 +20,10 @@ interface articlePost {
   favoritesCount: number;
   author: profile;
 }
+
+const formatDate = (date: Date, options: object) => {
+  return new Date(date).toLocaleDateString(undefined, options);
+};
 
 export default function Article() {
   const { articleSlug } = useParams();
@@ -54,15 +60,6 @@ export default function Article() {
     getArticle(articleSlug);
   }, [articleSlug]);
 
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString(undefined, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   return (
     <div className={styles.articleContainer}>
       {fetching || !article ? (
@@ -81,7 +78,14 @@ export default function Article() {
                     {article.author.username}
                   </Link>
                 </h5>
-                <small>{formatDate(article.createdAt)}</small>
+                <small>
+                  {formatDate(article.createdAt, {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </small>
               </div>
             </div>
           </section>
@@ -111,6 +115,8 @@ interface comment {
 
 const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
   const [writeComment, setWriteComment] = useState<boolean>(false);
+  const [writeCommentText, setWriteCommentText] = useState<string>("");
+  const [posting, setPosting] = useState<boolean>(false);
   const [comments, setComments] = useState<comment[] | null>(null);
 
   const getComments = async (articleSlug: string) => {
@@ -136,6 +142,37 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
       });
   };
 
+  const postComment = async (comment: string, articleSlug: string) => {
+    setPosting(true);
+    await fetch(`${API_URL}/articles/${articleSlug}/comments`, {
+      method: "POST",
+      headers: {
+        "Cache-Control": "no-cache",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        comment: {
+          body: comment,
+        },
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then((res) => {
+        setComments((comments) => [...comments, res.comment]);
+      })
+      .catch((error) => {
+        setComments(null);
+        console.log("postComments", error);
+      });
+    setPosting(false);
+    setWriteComment(false);
+  };
+
   useEffect(() => {
     getComments(article.slug);
   }, [article]);
@@ -159,6 +196,10 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
           className={`${styles.writeCommentForm} ${
             writeComment && styles.showHidden
           }`}
+          onSubmit={(e) => {
+            e.preventDefault();
+            postComment(writeCommentText, article.slug);
+          }}
         >
           <textarea
             name="comment"
@@ -166,6 +207,7 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
             rows={5}
             maxLength={600}
             className={styles.writeCommentField}
+            onChange={(e) => setWriteCommentText(e.target.value)}
           ></textarea>
           <button
             type="submit"
@@ -173,7 +215,7 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
             className={styles.commentButton}
           >
             Post
-            <RightArrowIcon />
+            {posting ? <Loader /> : <RightArrowIcon />}
           </button>
         </form>
       </div>
@@ -190,7 +232,13 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
                     {comment.author.username}
                   </Link>
                 </h5>
-                <small>Aug 31</small>
+                <small>
+                  {formatDate(comment.createdAt, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </small>
               </div>
             </div>
             <p className={styles.commentDescription}>{comment.body}</p>
