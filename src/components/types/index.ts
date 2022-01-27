@@ -27,3 +27,16 @@ export interface article {
   updatedAt: Date;
   __v: number;
 }
+
+export interface articlePost {
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tagList: Array<[]>;
+  favorited: boolean;
+  favoritesCount: number;
+  author: profile;
+}

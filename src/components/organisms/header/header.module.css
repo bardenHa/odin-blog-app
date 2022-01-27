@@ -1,0 +1,6 @@
+.headerSection {
+}
+
+.headerTitle {
+  @apply text-3xl sm:text-4xl md:text-7xl md:max-w-2xl lg:max-w-4xl font-bold tracking-tight;
+}

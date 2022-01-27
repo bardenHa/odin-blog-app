@@ -5,21 +5,8 @@ import { useEffect, useState } from "react";
 import SuspenseLoader from "components/organisms/suspense-loader";
 import ReactMarkdown from "react-markdown";
 
-import { profile } from "components/types";
+import { profile, articlePost } from "components/types";
 import Loader from "components/atoms/loader";
-
-interface articlePost {
-  slug: string;
-  title: string;
-  description: string;
-  body: string;
-  createdAt: Date;
-  updatedAt: Date;
-  tagList: Array<[]>;
-  favorited: boolean;
-  favoritesCount: number;
-  author: profile;
-}
 
 const formatDate = (date: Date, options: object) => {
   return new Date(date).toLocaleDateString(undefined, options);

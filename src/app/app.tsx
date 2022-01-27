@@ -12,6 +12,8 @@ const Signup = lazy(() => import("./pages/sign-up"));
 const Home = lazy(() => import("./pages/home"));
 const Profile = lazy(() => import("./pages/profile"));
 const Article = lazy(() => import("./pages/article"));
+const Articles = lazy(() => import("./pages/articles"));
+const Feed = lazy(() => import("./pages/feed"));
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
               <Route path={ROUTES.HOMEPAGE} element={<Home />} />
               <Route path={ROUTES.PROFILE} element={<Profile />} />
               <Route path={ROUTES.ARTICLE} element={<Article />} />
+              <Route path={ROUTES.ARTICLES} element={<Articles />} />
+              <Route path={ROUTES.FEED} element={<Feed />} />
             </Routes>
           </Suspense>
         </AuthProvider>
