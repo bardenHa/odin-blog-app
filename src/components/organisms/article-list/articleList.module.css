@@ -1,0 +1,14 @@
+.features {
+  @apply w-full max-w-screen-lg xl:max-w-screen-xl mx-auto grid grid-cols-1 gap-4 mb-6;
+}
+
+.cardWrapper {
+  @apply col-span-1 opacity-0;
+  animation: show 0.5s forwards;
+}
+
+@keyframes show {
+  to {
+    @apply opacity-100;
+  }
+}

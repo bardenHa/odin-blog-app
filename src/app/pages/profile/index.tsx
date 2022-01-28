@@ -7,29 +7,7 @@ import styles from "./profile.module.css";
 import Card from "components/organisms/card";
 import AuthContext from "components/context/AuthContext";
 import * as ROUTES from "constants/routes";
-import { user } from "components/types";
-
-interface profile {
-  username: string;
-  image: string;
-  bio?: string;
-  following: boolean;
-}
-
-interface article {
-  comments: string[];
-  _id: string;
-  title: string;
-  description: string;
-  body: string;
-  favoritesCount: number;
-  tagList: string[];
-  author: string;
-  slug: string;
-  createdAt: Date;
-  updatedAt: Date;
-  __v: number;
-}
+import { user, article, profile } from "components/types";
 
 export default function Profile() {
   const { user } = useContext(AuthContext);
@@ -96,6 +74,7 @@ export default function Profile() {
   useEffect(() => {
     setFetching(true);
     getUserProfile(username);
+    document.title = `${username} - Odin Blog`;
   }, [username]);
 
   return (
@@ -156,7 +135,7 @@ const UserProfile: React.FC<{
         )
       ) : (
         <p>
-          <Link to={`/${ROUTES.SIGNIN}`} className={styles.link}>
+          <Link to={`${ROUTES.SIGNIN}`} className={styles.link}>
             Sign in
           </Link>{" "}
           to follow this user.
@@ -181,7 +160,7 @@ const UserArticles: React.FC<{ articles: Array<article> }> = ({ articles }) => {
             callToAction={
               <Card.CallToAction
                 as="a"
-                href={`${ROUTES.ARTICLE}/${article.slug}`}
+                href={`${ROUTES.ARTICLE_LINK}/${article.slug}`}
               >
                 Visit article →
               </Card.CallToAction>

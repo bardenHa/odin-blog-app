@@ -3,10 +3,11 @@ import Card from "components/organisms/card";
 import Button from "components/atoms/button";
 
 import styles from "app/app.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "constants/routes";
 import { API_URL } from "constants/urls";
+import AuthContext from "components/context/AuthContext";
 
 const defaultImage =
   "https://avatars.dicebear.com/api/avataaars/harrybarden.svg?topChance=100&eyes[]=default&eyes[]=wink&eyes[]=happy&eyebrow[]=defaultNatural&eyebrow[]=default&mouth[]=smile&mouth[]=default";
@@ -119,6 +120,8 @@ const demoArticles = [
 const Home = (): JSX.Element => {
   const [articles, setArticles] = useState(demoArticles);
 
+  const { user } = useContext(AuthContext);
+
   const fetchArticles = async () => {
     try {
       const res = await fetch(`${API_URL}/articles/?limit=5`, {
@@ -175,12 +178,18 @@ const Home = (): JSX.Element => {
       </header>
       <section className={styles.copy}>
         <div className={styles.copyInner}>
-          <Link to={ROUTES.SIGNUP}>
-            <Button>Sign Up</Button>
-          </Link>
-          <a href="#" className={styles.anchorCallToAction}>
+          {user ? (
+            <Link to={ROUTES.FEED}>
+              <Button>View Feed</Button>
+            </Link>
+          ) : (
+            <Link to={ROUTES.SIGNUP}>
+              <Button>Sign Up</Button>
+            </Link>
+          )}
+          <Link to={ROUTES.ARTICLES} className={styles.anchorCallToAction}>
             Articles →
-          </a>
+          </Link>
         </div>
       </section>
       <section className={styles.features}>
@@ -204,9 +213,11 @@ const Home = (): JSX.Element => {
         ))}
       </section>
       <footer className={styles.footer}>
-        <a href="https://github.com/bardenHa">
-          Harry Barden @ {new Date().getFullYear()}
-        </a>
+        🛠 by{" "}
+        <a target="_blank" rel="noreferrer" href="https://github.com/bardenHa">
+          Harry Barden
+        </a>{" "}
+        @ 2022
       </footer>
     </div>
   );

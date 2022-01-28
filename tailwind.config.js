@@ -6,7 +6,7 @@ module.exports = {
   darkMode: "class",
   mode: "jit",
   purge: ["./*.html", "./src/**/*.{css}"],
-  plugins: [forms, lineClamp],
+  plugins: [forms, lineClamp, require("@tailwindcss/typography")],
   theme: {
     extend: {
       colors: {
@@ -22,6 +22,7 @@ module.exports = {
       },
       transitionProperty: {
         width: "width",
+        height: "height",
       },
     },
   },
