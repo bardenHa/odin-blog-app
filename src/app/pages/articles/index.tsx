@@ -28,7 +28,7 @@ export default function Articles() {
         setArticles(res.articles);
       })
       .catch((error) => {
-        console.log("getArticle", error);
+        console.log("getArticles", error);
       });
     setFetching(false);
   };
