@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "constants/urls";
 import styles from "./article.module.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SuspenseLoader from "components/organisms/suspense-loader";
 import ReactMarkdown from "react-markdown";
+import AuthContext from "components/context/AuthContext";
+import * as ROUTES from "constants/routes";
 
 import { profile, articlePost } from "components/types";
 import Loader from "components/atoms/loader";
@@ -106,6 +108,8 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
   const [posting, setPosting] = useState<boolean>(false);
   const [comments, setComments] = useState<comment[] | null>(null);
 
+  const { user } = useContext(AuthContext);
+
   const getComments = async (articleSlug: string) => {
     await fetch(`${API_URL}/articles/${articleSlug}/comments`, {
       method: "GET",
@@ -171,13 +175,22 @@ const Comments: React.FC<{ article: articlePost }> = ({ article }) => {
           <h2>
             Comments {comments && comments.length > 0 && `(${comments.length})`}
           </h2>
-          <button
-            className={styles.commentButton}
-            onClick={() => setWriteComment(!writeComment)}
-          >
-            {writeComment ? <MinusIcon /> : <PlusIcon />}
-            Write a comment
-          </button>
+          {user ? (
+            <button
+              className={styles.commentButton}
+              onClick={() => setWriteComment(!writeComment)}
+            >
+              {writeComment ? <MinusIcon /> : <PlusIcon />}
+              Write a comment
+            </button>
+          ) : (
+            <Link to={ROUTES.SIGNUP}>
+              <button className={styles.commentButton}>
+                Sign up to comment
+                <RightArrowIcon />
+              </button>
+            </Link>
+          )}
         </div>
         <form
           className={`${styles.writeCommentForm} ${

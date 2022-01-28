@@ -124,15 +124,6 @@ export default function SignUp() {
           </div>
           {error && <ErrorMessage error={error} />}
         </form>
-        <div className={styles.signinButtonWrapper}>
-          <button
-            name="button2"
-            className={styles.signinButton}
-            onClick={authReq}
-          >
-            Auth route
-          </button>
-        </div>
       </div>
     </section>
   );

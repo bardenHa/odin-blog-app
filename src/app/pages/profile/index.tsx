@@ -135,7 +135,7 @@ const UserProfile: React.FC<{
         )
       ) : (
         <p>
-          <Link to={`/${ROUTES.SIGNIN}`} className={styles.link}>
+          <Link to={`${ROUTES.SIGNIN}`} className={styles.link}>
             Sign in
           </Link>{" "}
           to follow this user.

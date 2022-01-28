@@ -213,9 +213,11 @@ const Home = (): JSX.Element => {
         ))}
       </section>
       <footer className={styles.footer}>
-        <a href="https://github.com/bardenHa">
-          Harry Barden @ {new Date().getFullYear()}
-        </a>
+        🛠 by{" "}
+        <a target="_blank" rel="noreferrer" href="https://github.com/bardenHa">
+          Harry Barden
+        </a>{" "}
+        @ 2022
       </footer>
     </div>
   );
