@@ -19,11 +19,18 @@
 }
 
 .iconContainer {
-  @apply absolute right-3 bottom-0 flex items-center justify-center rounded-md opacity-50;
+  @apply absolute right-3 bottom-0 h-full flex items-center justify-center rounded-md opacity-50;
 }
 
 .icon {
   @apply h-12 w-12 md:h-24 md:w-24 text-light-text transition-width duration-700 ease-in-out;
+  clip-path: circle(20px at center);
+}
+
+@media (min-width: 768px) {
+  .icon {
+    clip-path: circle(45px at center);
+  }
 }
 
 :global(.dark) .icon {

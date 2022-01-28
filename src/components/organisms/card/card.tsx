@@ -15,11 +15,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div ref={ref} className={styles.card} {...rest}>
         {icon && (
-          <div>
-            <span className={styles.iconContainer}>
-              <img src={icon} alt="Author icon" className={styles.icon} />
-            </span>
-          </div>
+          <span className={styles.iconContainer}>
+            <img src={icon} alt="Author icon" className={styles.icon} />
+          </span>
         )}
         <div className={styles.content}>
           <h3 className={styles.title}>{title}</h3>
