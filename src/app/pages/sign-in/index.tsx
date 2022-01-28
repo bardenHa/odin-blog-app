@@ -1,6 +1,5 @@
 import { useEffect, useContext } from "react";
 import styles from "./signin.module.css";
-import { API_URL } from "constants/urls";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { VALIDATION_MESSAGES } from "constants/validation-messages";
 import AuthContext from "components/context/AuthContext";
@@ -19,29 +18,6 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
-  const authReq = () => {
-    fetch(`${API_URL}/user`, {
-      method: "GET",
-      headers: {
-        "Cache-Control": "no-cache",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw response.json();
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("auth data", data);
-      })
-      .catch((error) => {
-        error.then((err) => {
-          console.log("auth", err);
-        });
-      });
-  };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formData = {
